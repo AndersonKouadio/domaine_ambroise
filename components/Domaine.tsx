@@ -101,7 +101,7 @@ export default function Domaine() {
               <p className="font-cinzel text-or text-sm tracking-[0.2em] uppercase mb-3">Un cadre naturel unique</p>
               <p className="font-poppins text-black/80 text-lg leading-relaxed">
                 Situé à Tiassalé, en bordure du majestueux fleuve Bandama,
-                le <strong className="text-vert">Domaine Ambroise</strong> est un lieu d&apos;exception dédié
+                le <strong className="text-vert">Domaine Ambroise </strong> est un lieu d&apos;exception dédié
                 à la détente, aux loisirs et aux événements mémorables.
               </p>
             </div>

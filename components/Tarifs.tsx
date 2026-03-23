@@ -98,8 +98,9 @@ function PricingTable({ rows }: { rows: PricingRow[] }) {
   );
 }
 
+// Ajout de whitespace-nowrap, shrink-0 et ajustement du padding
 const tabClass =
-  "font-cinzel text-xs min-w-fit tracking-[0.15em] uppercase px-6 py-3 transition-all duration-300 outline-none cursor-pointer " +
+  "font-cinzel text-xs w-fit tracking-[0.15em] uppercase px-4 md:px-6 py-3 transition-all duration-300 outline-none cursor-pointer " +
   "bg-white text-vert border border-vert/20 hover:border-or " +
   "data-[selected]:bg-vert data-[selected]:text-or data-[selected]:border-transparent data-[selected]:shadow-lg";
 
@@ -132,7 +133,7 @@ export default function Tarifs() {
   };
 
   return (
-    <section ref={sectionRef} id="tarifs" className="bg-cream py-24 md:py-32">
+    <section ref={sectionRef} id="tarifs" className="bg-cream py-24 md:py-32 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Header */}
@@ -148,17 +149,17 @@ export default function Tarifs() {
         </div>
 
         {/* Tabs */}
-        <div className="tarifs-tabs">
+        <div className="tarifs-tabs w-full">
           <Tabs
             defaultSelectedKey="visites"
             onSelectionChange={animateCards}
-            className="w-full max-w-md"
+            className="w-full"
           >
-            {/* Tab list */}
-            <Tabs.ListContainer>
+            {/* Tab list avec défilement horizontal natif caché */}
+            <Tabs.ListContainer className="w-full overflow-x-auto pb-4 -mb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               <Tabs.List
                 aria-label="Tarifs"
-                className="bg-transparent border-none p-0"
+                className="flex flex-row flex-nowrap w-max gap-2 bg-transparent border-none p-1 mx-auto"
               >
                 <Tabs.Tab id="visites" className={tabClass}>
                   Visites & Espaces
@@ -176,8 +177,9 @@ export default function Tarifs() {
             </Tabs.ListContainer>
 
             {/* Visites & Espaces */}
-            <Tabs.Panel id="visites" className="min-h-100 outline-none">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6"> {visitesData.map((espace) => (
+            <Tabs.Panel id="visites" className="min-h-100 outline-none mt-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6"> 
+                {visitesData.map((espace) => (
                   <Card
                     key={espace.title}
                     className="tarifs-card bg-white shadow-sm border border-or/10 rounded-none p-0 gap-0"
@@ -197,7 +199,7 @@ export default function Tarifs() {
             </Tabs.Panel>
 
             {/* Privatisation */}
-            <Tabs.Panel id="privatisation" className="min-h-100 outline-none">
+            <Tabs.Panel id="privatisation" className="min-h-100 outline-none mt-6">
               <div className="max-w-2xl mx-auto">
                 <Card className="tarifs-card bg-white shadow-sm border border-or/10 rounded-none p-0 gap-0">
                   <div className="bg-vert p-6">
@@ -216,7 +218,7 @@ export default function Tarifs() {
             </Tabs.Panel>
 
             {/* L'Île */}
-            <Tabs.Panel id="ile" className="min-h-100 outline-none">
+            <Tabs.Panel id="ile" className="min-h-100 outline-none mt-6">
               <div className="max-w-2xl mx-auto">
                 <Card className="tarifs-card bg-white shadow-sm border border-or/10 rounded-none p-0 gap-0">
                   <div className="bg-vert p-6 flex items-center gap-3">
@@ -238,7 +240,7 @@ export default function Tarifs() {
             </Tabs.Panel>
 
             {/* Prestations */}
-            <Tabs.Panel id="prestations" className="min-h-100 outline-none">
+            <Tabs.Panel id="prestations" className="min-h-100 outline-none mt-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
                 {prestationsData.map((section) => (
                   <Card

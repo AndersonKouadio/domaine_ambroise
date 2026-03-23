@@ -1,0 +1,165 @@
+"use client";
+
+import { useRef } from "react";
+import Image from "next/image";
+import { Card } from "@heroui/react";
+import { gsap, useGSAP } from "@/lib/gsap";
+
+const stats = [
+  { value: 117, suffix: " km", label: "d'Abidjan" },
+  { value: 1000, suffix: "", label: "personnes accueillies" },
+  { value: 3, suffix: "", label: "espaces privatisables" },
+];
+
+export default function Domaine() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useGSAP(() => {
+    // Section header
+    gsap.from(".domaine-header > *", {
+      opacity: 0, y: 40, stagger: 0.15, duration: 0.9, ease: "power3.out",
+      scrollTrigger: { trigger: ".domaine-header", start: "top 82%" },
+    });
+
+    // Image grid slides from left
+    gsap.from(".domaine-images", {
+      opacity: 0, x: -60, duration: 1.1, ease: "power3.out",
+      scrollTrigger: { trigger: ".domaine-images", start: "top 80%" },
+    });
+
+    // Text block slides from right
+    gsap.from(".domaine-text", {
+      opacity: 0, x: 60, duration: 1.1, ease: "power3.out",
+      scrollTrigger: { trigger: ".domaine-text", start: "top 80%" },
+    });
+
+    // Counter animation
+    stats.forEach((stat, i) => {
+      const el = document.querySelector(`[data-stat="${i}"]`);
+      if (!el) return;
+      const obj = { val: 0 };
+      gsap.to(obj, {
+        val: stat.value,
+        duration: 2,
+        ease: "power2.out",
+        scrollTrigger: { trigger: el, start: "top 85%", once: true },
+        onUpdate() {
+          const v = Math.round(obj.val);
+          el.textContent = (v >= 1000 ? "1 000" : String(v)) + stat.suffix;
+        },
+        onComplete() {
+          el.textContent = (stat.value >= 1000 ? "1 000" : String(stat.value)) + stat.suffix;
+        },
+      });
+    });
+
+    // Mission/Vision blocks stagger in
+    gsap.from(".domaine-block", {
+      opacity: 0, y: 40, stagger: 0.2, duration: 0.9, ease: "power3.out",
+      scrollTrigger: { trigger: ".domaine-block", start: "top 85%" },
+    });
+  }, { scope: sectionRef });
+
+  return (
+    <section ref={sectionRef} id="domaine" className="bg-cream py-24 md:py-32 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6">
+
+        {/* Header */}
+        <div className="domaine-header text-center mb-20">
+          <p className="font-cinzel text-or text-xs tracking-[0.45em] uppercase mb-4">Notre histoire</p>
+          <h2 className="font-cinzel text-4xl md:text-5xl text-vert font-semibold mb-6">Le Domaine Ambroise</h2>
+          <div className="gold-line w-32 mx-auto" />
+        </div>
+
+        {/* Main content */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-24">
+
+          {/* Images */}
+          <div className="domaine-images relative grid grid-cols-2 gap-3 h-[480px]">
+            <div className="relative col-span-1 row-span-2 overflow-hidden">
+              <Image src="/images/fleuve/5-IMG_5790.jpg" alt="Le fleuve Bandama" fill
+                className="object-cover hover:scale-105 transition-transform duration-700"
+                sizes="(max-width: 768px) 50vw, 25vw" />
+            </div>
+            <div className="relative overflow-hidden">
+              <Image src="/images/personne/1-img (1).jpg" alt="Ambiance" fill
+                className="object-cover hover:scale-105 transition-transform duration-700"
+                sizes="(max-width: 768px) 50vw, 25vw" />
+            </div>
+            <div className="relative overflow-hidden">
+              <Image src="/images/cocotier/2-IMG_5757.jpg" alt="Les cocotiers" fill
+                className="object-cover hover:scale-105 transition-transform duration-700"
+                sizes="(max-width: 768px) 50vw, 25vw" />
+            </div>
+            <div className="absolute -bottom-4 -right-4 w-32 h-32 border-2 border-or -z-10" />
+            <div className="absolute -top-4 -left-4 w-14 h-14 bg-or/10 -z-10" />
+          </div>
+
+          {/* Text */}
+          <div className="domaine-text flex flex-col gap-6">
+            <div>
+              <p className="font-cinzel text-or text-sm tracking-[0.2em] uppercase mb-3">Un cadre naturel unique</p>
+              <p className="font-poppins text-black/80 text-lg leading-relaxed">
+                Situé à Tiassalé, en bordure du majestueux fleuve Bandama,
+                le <strong className="text-vert">Domaine Ambroise</strong> est un lieu d&apos;exception dédié
+                à la détente, aux loisirs et aux événements mémorables.
+              </p>
+            </div>
+
+            <div className="gold-line" />
+
+            <p className="font-poppins text-black/65 leading-relaxed">
+              Entouré d&apos;une nature luxuriante, entre cocotiers, vastes espaces verts
+              et panorama apaisant sur l&apos;eau, le domaine offre une expérience immersive
+              où calme, beauté et élégance se rencontrent.
+            </p>
+
+            {/* Stats with counter */}
+            <div className="grid grid-cols-3 gap-4 mt-2">
+              {stats.map((stat, i) => (
+                <Card key={stat.label} className="text-center p-4 border border-or/20 bg-white/70 shadow-none rounded-none">
+                  <p
+                    data-stat={i}
+                    className="font-cinzel text-or text-xl md:text-2xl font-bold"
+                  >
+                    0{stat.suffix}
+                  </p>
+                  <p className="font-poppins text-vert text-xs mt-1 leading-tight">{stat.label}</p>
+                </Card>
+              ))}
+            </div>
+
+            {/* Features */}
+            <div className="grid grid-cols-2 gap-2 mt-1">
+              {["Accès direct au fleuve", "Cocotiers & espaces verts", "Atmosphère tropicale", "Rochers naturels"].map((f) => (
+                <div key={f} className="flex items-center gap-2">
+                  <div className="w-1.5 h-1.5 rounded-full bg-or shrink-0" />
+                  <p className="font-poppins text-sm text-black/65">{f}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Mission / Vision */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-or/20">
+          <div className="domaine-block bg-vert p-10 md:p-14">
+            <p className="font-cinzel text-or text-xs tracking-[0.3em] uppercase mb-4">Notre mission</p>
+            <p className="font-poppins text-white/85 leading-relaxed">
+              Offrir un espace unique où particuliers et entreprises peuvent vivre des moments d&apos;exception,
+              dans un cadre naturel prestigieux, en alliant confort, convivialité et qualité de service.
+            </p>
+          </div>
+          <div className="domaine-block bg-vert-second p-10 md:p-14">
+            <p className="font-cinzel text-or text-xs tracking-[0.3em] uppercase mb-4">Notre vision</p>
+            <p className="font-poppins text-white/85 leading-relaxed">
+              Devenir une référence incontournable en Afrique de l&apos;Ouest dans l&apos;accueil d&apos;événements
+              et de séjours en pleine nature, en incarnant un art de vivre alliant élégance, authenticité et
+              expérience immersive.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

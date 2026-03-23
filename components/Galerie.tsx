@@ -1,7 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
+import { Button } from "@heroui/react";
+import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 
 type GalleryItem = {
   src: string;
@@ -28,9 +30,10 @@ const photos: GalleryItem[] = [
   { src: "/images/bungalow/4-IMG_5745.jpg", alt: "Bungalow côté nature", category: "Espaces" },
 ];
 
-const categories = ["Tout", "Nature", "Espaces", "Personnes", "Événements"];
+const categoryList = ["Tout", "Nature", "Espaces", "Personnes", "Événements"];
 
 export default function Galerie() {
+  const sectionRef = useRef<HTMLElement>(null);
   const [activeCategory, setActiveCategory] = useState("Tout");
   const [lightbox, setLightbox] = useState<GalleryItem | null>(null);
 
@@ -39,14 +42,55 @@ export default function Galerie() {
       ? photos
       : photos.filter((p) => p.category === activeCategory);
 
+  useGSAP(() => {
+    // Header
+    gsap.from(".galerie-header > *", {
+      opacity: 0, y: 40, stagger: 0.15, duration: 0.9, ease: "power3.out",
+      scrollTrigger: { trigger: ".galerie-header", start: "top 82%" },
+    });
+
+    // Filter buttons
+    gsap.from(".galerie-filters", {
+      opacity: 0, y: 30, duration: 0.8, ease: "power3.out",
+      scrollTrigger: { trigger: ".galerie-filters", start: "top 85%" },
+    });
+
+    // Photos batch reveal
+    ScrollTrigger.batch(".galerie-photo", {
+      start: "top 88%",
+      onEnter: (batch) =>
+        gsap.from(batch, {
+          opacity: 0,
+          scale: 0.92,
+          stagger: 0.06,
+          duration: 0.6,
+          ease: "power3.out",
+        }),
+      once: true,
+    });
+  }, { scope: sectionRef });
+
+  const handleFilterChange = (cat: string) => {
+    setActiveCategory(cat);
+    // Animate new set of photos after React re-renders
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        gsap.fromTo(
+          ".galerie-photo",
+          { opacity: 0, scale: 0.92 },
+          { opacity: 1, scale: 1, stagger: 0.04, duration: 0.45, ease: "power3.out" }
+        );
+      });
+    });
+  };
+
   return (
-    <section id="galerie" className="bg-white py-24 md:py-32">
+    <section ref={sectionRef} id="galerie" className="bg-white py-24 md:py-32">
       <div className="max-w-7xl mx-auto px-6">
+
         {/* Header */}
-        <div className="text-center mb-16">
-          <p className="font-cinzel text-or text-xs tracking-[0.4em] uppercase mb-4">
-            Galerie
-          </p>
+        <div className="galerie-header text-center mb-16">
+          <p className="font-cinzel text-or text-xs tracking-[0.4em] uppercase mb-4">Galerie</p>
           <h2 className="font-cinzel text-4xl md:text-5xl text-vert font-semibold mb-6">
             Le Domaine en images
           </h2>
@@ -54,19 +98,19 @@ export default function Galerie() {
         </div>
 
         {/* Filters */}
-        <div className="flex flex-wrap justify-center gap-2 mb-12">
-          {categories.map((cat) => (
-            <button
+        <div className="galerie-filters flex flex-wrap justify-center gap-2 mb-12">
+          {categoryList.map((cat) => (
+            <Button
               key={cat}
-              onClick={() => setActiveCategory(cat)}
-              className={`font-poppins text-xs tracking-[0.15em] uppercase px-5 py-2.5 transition-all duration-300 ${
+              onPress={() => handleFilterChange(cat)}
+              className={`font-poppins text-xs tracking-[0.15em] uppercase px-5 py-2.5 h-auto min-h-0 rounded-none transition-all duration-300 ${
                 activeCategory === cat
                   ? "bg-vert text-or"
                   : "bg-cream text-vert hover:bg-vert/10"
               }`}
             >
               {cat}
-            </button>
+            </Button>
           ))}
         </div>
 
@@ -75,7 +119,7 @@ export default function Galerie() {
           {filtered.map((photo, i) => (
             <div
               key={`${photo.src}-${i}`}
-              className={`relative overflow-hidden cursor-pointer group break-inside-avoid ${
+              className={`galerie-photo relative overflow-hidden cursor-pointer group break-inside-avoid ${
                 photo.span === "wide" ? "aspect-video" : photo.span === "tall" ? "aspect-[2/3]" : "aspect-square"
               }`}
               onClick={() => setLightbox(photo)}
@@ -92,9 +136,7 @@ export default function Galerie() {
                   <span className="font-cinzel text-or text-xs tracking-[0.2em] uppercase">
                     {photo.category}
                   </span>
-                  <p className="font-poppins text-white text-sm mt-1">
-                    {photo.alt}
-                  </p>
+                  <p className="font-poppins text-white text-sm mt-1">{photo.alt}</p>
                 </div>
               </div>
             </div>
@@ -129,12 +171,8 @@ export default function Galerie() {
             />
           </div>
           <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-center">
-            <p className="font-cinzel text-or text-xs tracking-[0.2em] uppercase">
-              {lightbox.category}
-            </p>
-            <p className="font-poppins text-white/70 text-sm mt-1">
-              {lightbox.alt}
-            </p>
+            <p className="font-cinzel text-or text-xs tracking-[0.2em] uppercase">{lightbox.category}</p>
+            <p className="font-poppins text-white/70 text-sm mt-1">{lightbox.alt}</p>
           </div>
         </div>
       )}

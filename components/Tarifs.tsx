@@ -99,7 +99,7 @@ function PricingTable({ rows }: { rows: PricingRow[] }) {
 }
 
 const tabClass =
-  "font-cinzel text-xs tracking-[0.15em] uppercase px-6 py-3 transition-all duration-300 outline-none cursor-pointer " +
+  "font-cinzel text-xs min-w-fit tracking-[0.15em] uppercase px-6 py-3 transition-all duration-300 outline-none cursor-pointer " +
   "bg-white text-vert border border-vert/20 hover:border-or " +
   "data-[selected]:bg-vert data-[selected]:text-or data-[selected]:border-transparent data-[selected]:shadow-lg";
 
@@ -152,7 +152,7 @@ export default function Tarifs() {
           <Tabs
             defaultSelectedKey="visites"
             onSelectionChange={animateCards}
-            className="w-full"
+            className="w-full max-w-md"
           >
             {/* Tab list */}
             <Tabs.ListContainer>
@@ -176,16 +176,15 @@ export default function Tarifs() {
             </Tabs.ListContainer>
 
             {/* Visites & Espaces */}
-            <Tabs.Panel id="visites" className="min-h-[400px] outline-none">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {visitesData.map((espace) => (
+            <Tabs.Panel id="visites" className="min-h-100 outline-none">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6"> {visitesData.map((espace) => (
                   <Card
                     key={espace.title}
                     className="tarifs-card bg-white shadow-sm border border-or/10 rounded-none p-0 gap-0"
                   >
                     <div className="bg-vert p-6 flex items-center gap-3">
                       <span className="text-2xl">{espace.icon}</span>
-                      <h3 className="font-cinzel text-or text-sm tracking-[0.1em] font-semibold">
+                      <h3 className="font-cinzel text-or text-sm tracking-widest font-semibold">
                         {espace.title}
                       </h3>
                     </div>
@@ -198,11 +197,11 @@ export default function Tarifs() {
             </Tabs.Panel>
 
             {/* Privatisation */}
-            <Tabs.Panel id="privatisation" className="min-h-[400px] outline-none">
+            <Tabs.Panel id="privatisation" className="min-h-100 outline-none">
               <div className="max-w-2xl mx-auto">
                 <Card className="tarifs-card bg-white shadow-sm border border-or/10 rounded-none p-0 gap-0">
                   <div className="bg-vert p-6">
-                    <h3 className="font-cinzel text-or text-sm tracking-[0.1em] font-semibold">
+                    <h3 className="font-cinzel text-or text-sm tracking-widest font-semibold">
                       Privatisation d&apos;espaces (+50 personnes)
                     </h3>
                     <p className="font-poppins text-white/60 text-xs mt-2">
@@ -217,13 +216,13 @@ export default function Tarifs() {
             </Tabs.Panel>
 
             {/* L'Île */}
-            <Tabs.Panel id="ile" className="min-h-[400px] outline-none">
+            <Tabs.Panel id="ile" className="min-h-100 outline-none">
               <div className="max-w-2xl mx-auto">
                 <Card className="tarifs-card bg-white shadow-sm border border-or/10 rounded-none p-0 gap-0">
                   <div className="bg-vert p-6 flex items-center gap-3">
                     <span className="text-2xl">🏝️</span>
                     <div>
-                      <h3 className="font-cinzel text-or text-sm tracking-[0.1em] font-semibold">
+                      <h3 className="font-cinzel text-or text-sm tracking-widest font-semibold">
                         L&apos;Île & Détente
                       </h3>
                       <p className="font-poppins text-white/60 text-xs mt-1">
@@ -239,7 +238,7 @@ export default function Tarifs() {
             </Tabs.Panel>
 
             {/* Prestations */}
-            <Tabs.Panel id="prestations" className="min-h-[400px] outline-none">
+            <Tabs.Panel id="prestations" className="min-h-100 outline-none">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
                 {prestationsData.map((section) => (
                   <Card
@@ -247,7 +246,7 @@ export default function Tarifs() {
                     className="tarifs-card bg-white shadow-sm border border-or/10 rounded-none p-0 gap-0"
                   >
                     <div className="bg-vert p-6">
-                      <h3 className="font-cinzel text-or text-sm tracking-[0.1em] font-semibold">
+                      <h3 className="font-cinzel text-or text-sm tracking-widest font-semibold">
                         {section.title}
                       </h3>
                     </div>

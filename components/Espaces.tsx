@@ -11,7 +11,7 @@ const espaces = [
     title: "Espace Terrain",
     subtitle: "Grand air & liberté",
     description: "Notre espace terrain vous offre une immersion totale dans la nature, avec une vue directe sur le fleuve Bandama. Idéal pour les pique-niques, les événements en plein air et les rassemblements conviviaux.",
-    image: "/images/info/1-IMG_5631.jpg",
+    image: "/images/cocotier/IMG_5878.jpg",
     features: ["Vue fleuve panoramique", "Tréteaux disponibles", "Jusqu'à 50 personnes", "Privatisation possible"],
     accent: "#dda228",
   },

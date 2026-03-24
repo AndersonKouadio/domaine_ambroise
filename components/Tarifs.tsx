@@ -101,8 +101,8 @@ function PricingTable({ rows }: { rows: PricingRow[] }) {
 // Ajout de whitespace-nowrap, shrink-0 et ajustement du padding
 const tabClass =
   "font-cinzel text-xs w-fit tracking-[0.15em] uppercase px-4 md:px-6 py-3 transition-all duration-300 outline-none cursor-pointer " +
-  "bg-white text-vert border border-vert/20 hover:border-or " +
-  "data-[selected]:bg-vert data-[selected]:text-or data-[selected]:border-transparent data-[selected]:shadow-lg";
+  "bg-white! text-vert! border border-vert/20 hover:border-or " +
+  "data-[selected]:bg-vert! data-[selected]:text-or! data-[selected]:border-transparent data-[selected]:shadow-lg";
 
 export default function Tarifs() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -110,15 +110,15 @@ export default function Tarifs() {
   useGSAP(() => {
     gsap.from(".tarifs-header > *", {
       opacity: 0, y: 40, stagger: 0.15, duration: 0.9, ease: "power3.out",
-      scrollTrigger: { trigger: ".tarifs-header", start: "top 82%" },
+      scrollTrigger: { trigger: ".tarifs-header", start: "top 82%", once: true },
     });
     gsap.from(".tarifs-tabs", {
       opacity: 0, y: 50, duration: 1, ease: "power3.out",
-      scrollTrigger: { trigger: ".tarifs-tabs", start: "top 80%" },
+      scrollTrigger: { trigger: ".tarifs-tabs", start: "top 80%", once: true },
     });
     gsap.from(".tarifs-cta", {
       opacity: 0, y: 30, duration: 0.8, ease: "power3.out",
-      scrollTrigger: { trigger: ".tarifs-cta", start: "top 88%" },
+      scrollTrigger: { trigger: ".tarifs-cta", start: "top 88%", once: true },
     });
   }, { scope: sectionRef });
 
@@ -269,7 +269,7 @@ export default function Tarifs() {
           </p>
           <Button
             onPress={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
-            className="font-cinzel border-2 border-vert text-vert bg-transparent text-xs font-semibold tracking-[0.2em] uppercase px-10 py-4 h-auto min-h-0 rounded-none hover:bg-vert hover:text-or transition-all duration-300"
+            className="font-cinzel border-2 border-vert text-vert! bg-transparent! text-xs font-semibold tracking-[0.2em] uppercase px-10 py-4 h-auto min-h-0 rounded-none hover:bg-vert! hover:text-or! transition-all duration-300"
           >
             Demander un devis personnalisé
           </Button>

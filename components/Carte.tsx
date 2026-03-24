@@ -55,7 +55,7 @@ export default function Carte() {
     // Header stagger
     gsap.from(".carte-header > *", {
       opacity: 0, y: 40, stagger: 0.15, duration: 0.9, ease: "power3.out",
-      scrollTrigger: { trigger: ".carte-header", start: "top 82%" },
+      scrollTrigger: { trigger: ".carte-header", start: "top 82%", once: true },
     });
 
     // Cards batch reveal: staggered as they enter viewport
@@ -75,7 +75,7 @@ export default function Carte() {
     // Bottom note
     gsap.from(".carte-note", {
       opacity: 0, y: 20, duration: 0.7, ease: "power3.out",
-      scrollTrigger: { trigger: ".carte-note", start: "top 90%" },
+      scrollTrigger: { trigger: ".carte-note", start: "top 90%", once: true },
     });
   }, { scope: sectionRef });
 

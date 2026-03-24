@@ -15,25 +15,7 @@ export default function Domaine() {
   const sectionRef = useRef<HTMLElement>(null);
 
   useGSAP(() => {
-    // Section header
-    gsap.from(".domaine-header > *", {
-      opacity: 0, y: 40, stagger: 0.15, duration: 0.9, ease: "power3.out",
-      scrollTrigger: { trigger: ".domaine-header", start: "top 82%" },
-    });
-
-    // Image grid slides from left
-    gsap.from(".domaine-images", {
-      opacity: 0, x: -60, duration: 1.1, ease: "power3.out",
-      scrollTrigger: { trigger: ".domaine-images", start: "top 80%" },
-    });
-
-    // Text block slides from right
-    gsap.from(".domaine-text", {
-      opacity: 0, x: 60, duration: 1.1, ease: "power3.out",
-      scrollTrigger: { trigger: ".domaine-text", start: "top 80%" },
-    });
-
-    // Counter animation
+    // Counter animation (toujours actif, indépendant du breakpoint)
     stats.forEach((stat, i) => {
       const el = document.querySelector(`[data-stat="${i}"]`);
       if (!el) return;
@@ -53,10 +35,58 @@ export default function Domaine() {
       });
     });
 
-    // Mission/Vision blocks stagger in
-    gsap.from(".domaine-block", {
-      opacity: 0, y: 40, stagger: 0.2, duration: 0.9, ease: "power3.out",
-      scrollTrigger: { trigger: ".domaine-block", start: "top 85%" },
+    const mm = gsap.matchMedia();
+
+    // ── Desktop ────────────────────────────────────────────────────────────────
+    mm.add("(min-width: 768px)", () => {
+      // Header : enfants en stagger puis gold line qui se déploie depuis le centre
+      gsap.from(".domaine-header > :not(.gold-line)", {
+        opacity: 0, y: 50, stagger: 0.15, duration: 1, ease: "power3.out",
+        scrollTrigger: { trigger: ".domaine-header", start: "top 82%", once: true },
+      });
+      gsap.fromTo(".domaine-header .gold-line",
+        { scaleX: 0, transformOrigin: "center" },
+        { scaleX: 1, duration: 1.2, ease: "power3.inOut", delay: 0.5,
+          scrollTrigger: { trigger: ".domaine-header", start: "top 82%", once: true } }
+      );
+
+      // Images : stagger scale-settle cinématique sur chaque container
+      gsap.from(".domaine-img", {
+        opacity: 0, scale: 1.08, stagger: 0.12, duration: 1.4, ease: "power2.out",
+        scrollTrigger: { trigger: ".domaine-images", start: "top 78%", once: true },
+      });
+
+      // Texte : enfants en cascade verticale (plus d'horizontal)
+      gsap.from(".domaine-text > *", {
+        opacity: 0, y: 50, stagger: 0.1, duration: 1, ease: "power3.out",
+        scrollTrigger: { trigger: ".domaine-text", start: "top 78%", once: true },
+      });
+
+      // Mission / Vision : scale + élévation (rendu éditorial)
+      gsap.from(".domaine-block", {
+        opacity: 0, y: 50, scale: 0.97, stagger: 0.2, duration: 1.1, ease: "power3.out",
+        scrollTrigger: { trigger: ".domaine-block", start: "top 85%", once: true },
+      });
+    });
+
+    // ── Mobile ─────────────────────────────────────────────────────────────────
+    mm.add("(max-width: 767px)", () => {
+      gsap.from(".domaine-header > *", {
+        opacity: 0, y: 30, stagger: 0.1, duration: 0.7, ease: "power3.out",
+        scrollTrigger: { trigger: ".domaine-header", start: "top 85%", once: true },
+      });
+      gsap.from(".domaine-images", {
+        opacity: 0, y: 40, duration: 0.8, ease: "power3.out",
+        scrollTrigger: { trigger: ".domaine-images", start: "top 85%", once: true },
+      });
+      gsap.from(".domaine-text > *", {
+        opacity: 0, y: 25, stagger: 0.08, duration: 0.7, ease: "power3.out",
+        scrollTrigger: { trigger: ".domaine-text", start: "top 85%", once: true },
+      });
+      gsap.from(".domaine-block", {
+        opacity: 0, y: 25, stagger: 0.12, duration: 0.7, ease: "power3.out",
+        scrollTrigger: { trigger: ".domaine-block", start: "top 85%", once: true },
+      });
     });
   }, { scope: sectionRef });
 
@@ -76,17 +106,17 @@ export default function Domaine() {
 
           {/* Images */}
           <div className="domaine-images relative grid grid-cols-2 gap-3 h-[480px]">
-            <div className="relative col-span-1 row-span-2 overflow-hidden">
+            <div className="domaine-img relative col-span-1 row-span-2 overflow-hidden">
               <Image src="/images/fleuve/5-IMG_5790.jpg" alt="Le fleuve Bandama" fill
                 className="object-cover hover:scale-105 transition-transform duration-700"
                 sizes="(max-width: 768px) 50vw, 25vw" />
             </div>
-            <div className="relative overflow-hidden">
+            <div className="domaine-img relative overflow-hidden">
               <Image src="/images/personne/1-img (1).jpg" alt="Ambiance" fill
                 className="object-cover hover:scale-105 transition-transform duration-700"
                 sizes="(max-width: 768px) 50vw, 25vw" />
             </div>
-            <div className="relative overflow-hidden">
+            <div className="domaine-img relative overflow-hidden">
               <Image src="/images/cocotier/2-IMG_5757.jpg" alt="Les cocotiers" fill
                 className="object-cover hover:scale-105 transition-transform duration-700"
                 sizes="(max-width: 768px) 50vw, 25vw" />

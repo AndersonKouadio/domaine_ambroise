@@ -46,13 +46,13 @@ export default function Galerie() {
     // Header
     gsap.from(".galerie-header > *", {
       opacity: 0, y: 40, stagger: 0.15, duration: 0.9, ease: "power3.out",
-      scrollTrigger: { trigger: ".galerie-header", start: "top 82%" },
+      scrollTrigger: { trigger: ".galerie-header", start: "top 82%", once: true },
     });
 
     // Filter buttons
     gsap.from(".galerie-filters", {
       opacity: 0, y: 30, duration: 0.8, ease: "power3.out",
-      scrollTrigger: { trigger: ".galerie-filters", start: "top 85%" },
+      scrollTrigger: { trigger: ".galerie-filters", start: "top 85%", once: true },
     });
 
     // Photos batch reveal
@@ -105,8 +105,8 @@ export default function Galerie() {
               onPress={() => handleFilterChange(cat)}
               className={`font-poppins text-xs tracking-[0.15em] uppercase px-5 py-2.5 h-auto min-h-0 rounded-none transition-all duration-300 ${
                 activeCategory === cat
-                  ? "bg-vert text-or"
-                  : "bg-cream text-vert hover:bg-vert/10"
+                  ? "bg-vert! text-or!"
+                  : "bg-cream! text-vert! hover:bg-vert/10!"
               }`}
             >
               {cat}

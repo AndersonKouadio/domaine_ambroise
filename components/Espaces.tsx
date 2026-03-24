@@ -48,28 +48,64 @@ export default function Espaces() {
   const sectionRef = useRef<HTMLElement>(null);
 
   useGSAP(() => {
-    // Header
-    gsap.from(".espaces-header > *", {
-      opacity: 0, y: 40, stagger: 0.15, duration: 0.9, ease: "power3.out",
-      scrollTrigger: { trigger: ".espaces-header", start: "top 82%" },
-    });
+    const mm = gsap.matchMedia();
 
-    // Each row: alternate slide from left / right
-    gsap.utils.toArray<HTMLElement>(".espace-row").forEach((row, i) => {
-      const fromLeft = i % 2 === 0;
-      gsap.from(row, {
-        opacity: 0,
-        x: fromLeft ? -80 : 80,
-        duration: 1.1,
-        ease: "power3.out",
-        scrollTrigger: { trigger: row, start: "top 82%", once: true },
+    // ── Desktop ────────────────────────────────────────────────────────────────
+    mm.add("(min-width: 768px)", () => {
+      // Header : stagger + gold line
+      gsap.from(".espaces-header > :not(.gold-line)", {
+        opacity: 0, y: 50, stagger: 0.15, duration: 1, ease: "power3.out",
+        scrollTrigger: { trigger: ".espaces-header", start: "top 82%", once: true },
+      });
+      gsap.fromTo(".espaces-header .gold-line",
+        { scaleX: 0, transformOrigin: "center" },
+        { scaleX: 1, duration: 1.2, ease: "power3.inOut", delay: 0.5,
+          scrollTrigger: { trigger: ".espaces-header", start: "top 82%", once: true } }
+      );
+
+      // Chaque ligne : image en rideau top→bottom, contenu en cascade
+      gsap.utils.toArray<HTMLElement>(".espace-row").forEach((row) => {
+        const imgCtr = row.querySelector(".espace-img-container") as HTMLElement;
+        const content = row.querySelector(".espace-content") as HTMLElement;
+
+        if (imgCtr) {
+          gsap.fromTo(imgCtr,
+            { clipPath: "inset(0 0 100% 0)" },
+            { clipPath: "inset(0 0 0% 0)", duration: 1.3, ease: "power2.inOut",
+              scrollTrigger: { trigger: row, start: "top 82%", once: true } }
+          );
+        }
+        if (content) {
+          gsap.from(Array.from(content.children), {
+            opacity: 0, y: 40, stagger: 0.09, duration: 0.9, ease: "power3.out", delay: 0.25,
+            scrollTrigger: { trigger: row, start: "top 78%", once: true },
+          });
+        }
+      });
+
+      // Banner
+      gsap.from(".espaces-banner", {
+        opacity: 0, y: 50, scale: 0.97, duration: 1.1, ease: "power3.out",
+        scrollTrigger: { trigger: ".espaces-banner", start: "top 85%", once: true },
       });
     });
 
-    // Capacité banner
-    gsap.from(".espaces-banner", {
-      opacity: 0, y: 50, scale: 0.97, duration: 1, ease: "power3.out",
-      scrollTrigger: { trigger: ".espaces-banner", start: "top 85%" },
+    // ── Mobile ─────────────────────────────────────────────────────────────────
+    mm.add("(max-width: 767px)", () => {
+      gsap.from(".espaces-header > *", {
+        opacity: 0, y: 30, stagger: 0.1, duration: 0.7, ease: "power3.out",
+        scrollTrigger: { trigger: ".espaces-header", start: "top 85%", once: true },
+      });
+      gsap.utils.toArray<HTMLElement>(".espace-row").forEach((row) => {
+        gsap.from(row, {
+          opacity: 0, y: 40, duration: 0.8, ease: "power3.out",
+          scrollTrigger: { trigger: row, start: "top 85%", once: true },
+        });
+      });
+      gsap.from(".espaces-banner", {
+        opacity: 0, y: 30, duration: 0.7, ease: "power3.out",
+        scrollTrigger: { trigger: ".espaces-banner", start: "top 88%", once: true },
+      });
     });
   }, { scope: sectionRef });
 
@@ -95,7 +131,7 @@ export default function Espaces() {
               className="espace-row grid grid-cols-1 lg:grid-cols-2 gap-0 overflow-hidden group"
             >
               {/* Image */}
-              <div className={`relative h-64 sm:h-80 lg:h-full lg:min-h-[440px] overflow-hidden ${i % 2 === 1 ? "lg:order-2" : ""}`}>
+              <div className={`espace-img-container relative h-64 sm:h-80 lg:h-full lg:min-h-[440px] overflow-hidden ${i % 2 === 1 ? "lg:order-2" : ""}`}>
                 <Image
                   src={espace.image}
                   alt={espace.title}
@@ -110,7 +146,7 @@ export default function Espaces() {
               </div>
 
               {/* Content */}
-              <div className={`flex flex-col justify-center p-8 md:p-12 lg:p-14 bg-cream min-h-[440px] ${i % 2 === 1 ? "lg:order-1" : ""}`}>
+              <div className={`espace-content flex flex-col justify-center p-8 md:p-12 lg:p-14 bg-cream min-h-[440px] ${i % 2 === 1 ? "lg:order-1" : ""}`}>
                 <p className="font-cinzel text-xs tracking-[0.3em] uppercase mb-2" style={{ color: espace.accent }}>
                   {espace.subtitle}
                 </p>
@@ -154,7 +190,7 @@ export default function Espaces() {
           </p>
           <Button
             onPress={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
-            className="font-cinzel bg-or text-vert text-xs font-bold tracking-[0.2em] uppercase px-10 py-4 rounded-none hover:bg-or-light h-auto min-h-0 transition-all duration-300 relative"
+            className="font-cinzel bg-or! text-vert! text-xs font-bold tracking-[0.2em] uppercase px-10 py-4 rounded-none hover:bg-or-light! h-auto min-h-0 transition-all duration-300 relative"
           >
             Demander un devis
           </Button>

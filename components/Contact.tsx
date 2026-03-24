@@ -48,21 +48,37 @@ export default function Contact() {
       opacity: 0, y: 40, stagger: 0.15, duration: 0.9, ease: "power3.out",
       scrollTrigger: { trigger: ".contact-header", start: "top 82%" },
     });
-    gsap.from(".contact-info", {
-      opacity: 0, x: -60, duration: 1.1, ease: "power3.out",
-      scrollTrigger: { trigger: ".contact-info", start: "top 80%" },
+    const mm = gsap.matchMedia();
+
+    mm.add("(min-width: 768px)", () => {
+      gsap.from(".contact-info", {
+        opacity: 0, y: 60, scale: 0.98, duration: 1.1, ease: "power3.out",
+        scrollTrigger: { trigger: ".contact-info", start: "top 80%", once: true },
+      });
+      gsap.from(".contact-form", {
+        opacity: 0, y: 60, scale: 0.98, duration: 1.1, ease: "power3.out", delay: 0.15,
+        scrollTrigger: { trigger: ".contact-form", start: "top 80%", once: true },
+      });
     });
-    gsap.from(".contact-form", {
-      opacity: 0, x: 60, duration: 1.1, ease: "power3.out",
-      scrollTrigger: { trigger: ".contact-form", start: "top 80%" },
+
+    mm.add("(max-width: 767px)", () => {
+      gsap.from(".contact-info", {
+        opacity: 0, y: 35, duration: 0.8, ease: "power3.out",
+        scrollTrigger: { trigger: ".contact-info", start: "top 85%", once: true },
+      });
+      gsap.from(".contact-form", {
+        opacity: 0, y: 35, duration: 0.8, ease: "power3.out",
+        scrollTrigger: { trigger: ".contact-form", start: "top 85%", once: true },
+      });
     });
+
     gsap.from(".contact-card", {
       opacity: 0, y: 30, stagger: 0.15, duration: 0.7, ease: "power3.out",
-      scrollTrigger: { trigger: ".contact-card", start: "top 82%" },
+      scrollTrigger: { trigger: ".contact-card", start: "top 82%", once: true },
     });
     gsap.from(".contact-field", {
       opacity: 0, y: 20, stagger: 0.07, duration: 0.6, ease: "power3.out",
-      scrollTrigger: { trigger: ".contact-field", start: "top 82%" },
+      scrollTrigger: { trigger: ".contact-field", start: "top 82%", once: true },
     });
   }, { scope: sectionRef });
 
@@ -280,8 +296,8 @@ export default function Contact() {
                   isDisabled={!isFormValid}
                   className={`flex items-center gap-3 font-cinzel text-xs font-bold tracking-[0.2em] uppercase px-10 py-4 h-auto min-h-0 rounded-none transition-all duration-300 ${
                     isFormValid
-                      ? "bg-or text-vert hover:bg-or-light hover:scale-105"
-                      : "bg-or/40 text-vert/50 cursor-not-allowed"
+                      ? "bg-or! text-vert! hover:bg-or-light! hover:scale-105"
+                      : "bg-or/40! text-vert/50! cursor-not-allowed"
                   }`}
                 >
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">

@@ -83,7 +83,7 @@ export default function Navbar() {
           <div className="hidden lg:flex items-center">
             <Button
               onPress={() => handleNavClick("#contact")}
-              className="font-cinzel bg-or text-vert text-xs font-semibold tracking-[0.15em] uppercase px-6 py-2.5 rounded-none hover:bg-or-light transition-colors duration-300 h-auto min-h-0"
+              className="font-cinzel bg-or! text-vert! text-xs font-semibold tracking-[0.15em] uppercase px-6 py-2.5 rounded-none hover:bg-or-light! transition-colors duration-300 h-auto min-h-0"
             >
               Réserver
             </Button>
@@ -123,7 +123,7 @@ export default function Navbar() {
           ))}
           <Button
             onPress={() => handleNavClick("#contact")}
-            className="mt-4 font-cinzel bg-or text-vert text-sm font-bold tracking-[0.2em] uppercase px-10 py-4 rounded-none hover:bg-or-light transition-colors duration-300 h-auto min-h-0"
+            className="mt-4 font-cinzel bg-or! text-vert! text-sm font-bold tracking-[0.2em] uppercase px-10 py-4 rounded-none hover:bg-or-light! transition-colors duration-300 h-auto min-h-0"
           >
             Réserver
           </Button>

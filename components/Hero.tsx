@@ -142,13 +142,14 @@ export default function Hero() {
         <div className="hero-cta flex flex-col sm:flex-row gap-3 sm:gap-4">
           <Button
             onPress={() => scrollTo("#espaces")}
-            className="font-cinzel bg-or text-vert text-xs font-bold tracking-[0.2em] uppercase px-10 py-4 h-auto min-h-0 rounded-none hover:bg-or-light transition-colors duration-300 hover:scale-105 active:scale-95"
+            className="font-cinzel bg-or! text-vert! text-xs font-bold tracking-[0.2em] uppercase px-10 py-4 h-auto min-h-0 rounded-none hover:bg-or-light! transition-colors duration-300 hover:scale-105 active:scale-95"
           >
             Découvrir les espaces
           </Button>
           <Button
+            variant="ghost"
             onPress={() => scrollTo("#contact")}
-            className="font-cinzel bg-transparent border-2 border-white/70 text-white text-xs font-semibold tracking-[0.2em] uppercase px-10 py-4 h-auto min-h-0 rounded-none hover:border-or hover:text-or transition-all duration-300"
+            className="font-cinzel bg-transparent! text-white! border-2 border-white/70 text-xs font-semibold tracking-[0.2em] uppercase px-10 py-4 h-auto min-h-0 rounded-none hover:border-or hover:text-or! transition-all duration-300"
           >
             Réserver
           </Button>

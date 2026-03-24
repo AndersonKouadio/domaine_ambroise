@@ -139,13 +139,19 @@ export default function Hero() {
         </p>
 
         {/* CTAs */}
-        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 hero-cta ">
-          <a href="#espaces" className="font-cinzel bg-or text-vert text-xs font-bold tracking-[0.2em] uppercase px-10 py-4 hover:bg-or-light transition-colors duration-300 hover:scale-105 active:scale-95 text-center">
+        <div className="hero-cta flex flex-col sm:flex-row gap-3 sm:gap-4">
+          <Button
+            onPress={() => scrollTo("#espaces")}
+            className="font-cinzel bg-or text-vert text-xs font-bold tracking-[0.2em] uppercase px-10 py-4 h-auto min-h-0 rounded-none hover:bg-or-light transition-colors duration-300 hover:scale-105 active:scale-95"
+          >
             Découvrir les espaces
-          </a>
-          <a href="#contact" className="font-cinzel border border-white/50 text-white text-xs font-semibold tracking-[0.2em] uppercase px-10 py-4 hover:border-or hover:text-or transition-all duration-300 text-center">
+          </Button>
+          <Button
+            onPress={() => scrollTo("#contact")}
+            className="font-cinzel bg-transparent border-2 border-white/70 text-white text-xs font-semibold tracking-[0.2em] uppercase px-10 py-4 h-auto min-h-0 rounded-none hover:border-or hover:text-or transition-all duration-300"
+          >
             Réserver
-          </a>
+          </Button>
         </div>
       </div>
 

@@ -109,7 +109,7 @@ export default function Carte() {
               {/* Category header */}
               <div className="p-6 border-b border-or/20 flex items-center gap-3">
                 <span className="text-3xl">{cat.icon}</span>
-                <h3 className="font-cinzel text-or text-lg font-semibold tracking-[0.1em]">
+                <h3 className="font-cinzel text-or text-lg font-semibold tracking-widest">
                   {cat.title}
                 </h3>
               </div>

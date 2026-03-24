@@ -2,7 +2,18 @@
 
 import { useRef, useState } from "react";
 import Image from "next/image";
-import { Button } from "@heroui/react";
+import {
+  Button,
+  Form,
+  TextField,
+  Input,
+  TextArea,
+  Select,
+  ListBox,
+  ListBoxItem,
+  NumberField,
+} from "@heroui/react";
+import { Label } from "react-aria-components";
 import { gsap, useGSAP } from "@/lib/gsap";
 
 const WHATSAPP_NUMBER = "2250554020623";
@@ -16,74 +27,63 @@ const espaceOptions = [
   "Autre / Devis",
 ];
 
+const fieldClass =
+  "w-full border border-vert/20 bg-cream px-4 py-3 font-poppins text-sm text-black focus:outline-none focus:border-or transition-colors rounded-none";
+
+const labelClass =
+  "font-cinzel text-vert text-xs tracking-[0.2em] uppercase block mb-2";
+
 export default function Contact() {
   const sectionRef = useRef<HTMLElement>(null);
-  const [form, setForm] = useState({
-    nom: "",
-    telephone: "",
-    email: "",
-    espace: "",
-    date: "",
-    personnes: "",
-    message: "",
-  });
+  const [nom, setNom] = useState("");
+  const [telephone, setTelephone] = useState("");
+  const [email, setEmail] = useState("");
+  const [espace, setEspace] = useState<string>("");
+  const [date, setDate] = useState("");
+  const [personnes, setPersonnes] = useState<number | undefined>(undefined);
+  const [message, setMessage] = useState("");
 
   useGSAP(() => {
-    // Header
     gsap.from(".contact-header > *", {
       opacity: 0, y: 40, stagger: 0.15, duration: 0.9, ease: "power3.out",
       scrollTrigger: { trigger: ".contact-header", start: "top 82%" },
     });
-
-    // Left info panel slides from left
     gsap.from(".contact-info", {
       opacity: 0, x: -60, duration: 1.1, ease: "power3.out",
       scrollTrigger: { trigger: ".contact-info", start: "top 80%" },
     });
-
-    // Form slides from right
     gsap.from(".contact-form", {
       opacity: 0, x: 60, duration: 1.1, ease: "power3.out",
       scrollTrigger: { trigger: ".contact-form", start: "top 80%" },
     });
-
-    // Info cards stagger
     gsap.from(".contact-card", {
       opacity: 0, y: 30, stagger: 0.15, duration: 0.7, ease: "power3.out",
       scrollTrigger: { trigger: ".contact-card", start: "top 82%" },
     });
-
-    // Form fields stagger
     gsap.from(".contact-field", {
       opacity: 0, y: 20, stagger: 0.07, duration: 0.6, ease: "power3.out",
       scrollTrigger: { trigger: ".contact-field", start: "top 82%" },
     });
   }, { scope: sectionRef });
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-  ) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const lines = [
       "*Nouvelle demande – Domaine Ambroise*",
       "",
-      `*Nom :* ${form.nom}`,
-      `*Telephone :* ${form.telephone}`,
-      form.email ? `*Email :* ${form.email}` : null,
-      `*Espace :* ${form.espace}`,
-      form.date ? `*Date :* ${form.date}` : null,
-      form.personnes ? `*Personnes :* ${form.personnes}` : null,
-      form.message ? `\n*Message :*\n${form.message}` : null,
+      `*Nom :* ${nom}`,
+      `*Telephone :* ${telephone}`,
+      email ? `*Email :* ${email}` : null,
+      espace ? `*Espace :* ${espace}` : null,
+      date ? `*Date :* ${date}` : null,
+      personnes ? `*Personnes :* ${personnes}` : null,
+      message ? `\n*Message :*\n${message}` : null,
     ].filter(Boolean).join("\n");
 
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lines)}`, "_blank");
   };
 
-  const isFormValid = form.nom && form.telephone && form.espace;
+  const isFormValid = !!nom && !!telephone && !!espace;
 
   return (
     <section ref={sectionRef} id="contact" className="bg-cream py-24 md:py-32">
@@ -105,7 +105,6 @@ export default function Contact() {
 
           {/* Left: Contact info */}
           <div className="contact-info lg:col-span-2 flex flex-col gap-8">
-            {/* Photo */}
             <div className="relative h-64 overflow-hidden">
               <Image
                 src="/images/fleuve/9-IMG_5858.jpg"
@@ -114,14 +113,13 @@ export default function Contact() {
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 40vw"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-vert/80 to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-vert/80 to-transparent" />
               <div className="absolute bottom-6 left-6">
                 <p className="font-cinzel text-or text-sm">Domaine Ambroise</p>
                 <p className="font-poppins text-white/80 text-xs mt-1">Fleuve Bandama, Tiassalé</p>
               </div>
             </div>
 
-            {/* Info cards */}
             <div className="space-y-4">
               <div className="contact-card bg-white p-5 border-l-2 border-or">
                 <p className="font-cinzel text-vert text-xs tracking-[0.2em] uppercase mb-2">Localisation</p>
@@ -161,112 +159,118 @@ export default function Contact() {
 
           {/* Right: Form */}
           <div className="contact-form lg:col-span-3">
-            <form onSubmit={handleSubmit} className="bg-white p-8 md:p-10 shadow-sm">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <Form onSubmit={handleSubmit} className="bg-white p-8 md:p-10 shadow-sm">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
 
-                <div className="contact-field md:col-span-2">
-                  <label className="font-cinzel text-vert text-xs tracking-[0.2em] uppercase block mb-2">
-                    Nom complet *
-                  </label>
-                  <input
-                    type="text"
-                    name="nom"
-                    value={form.nom}
-                    onChange={handleChange}
-                    required
-                    placeholder="Votre nom et prénom"
-                    className="w-full border border-vert/20 bg-cream px-4 py-3 font-poppins text-sm text-black focus:outline-none focus:border-or transition-colors"
-                  />
-                </div>
+                {/* Nom */}
+                <TextField
+                  value={nom}
+                  onChange={setNom}
+                  isRequired
+                  className="contact-field md:col-span-2 flex flex-col gap-2"
+                >
+                  <Label className={labelClass}>Nom complet *</Label>
+                  <Input placeholder="Votre nom et prénom" className={fieldClass} />
+                </TextField>
 
-                <div className="contact-field">
-                  <label className="font-cinzel text-vert text-xs tracking-[0.2em] uppercase block mb-2">
-                    Téléphone *
-                  </label>
-                  <input
-                    type="tel"
-                    name="telephone"
-                    value={form.telephone}
-                    onChange={handleChange}
-                    required
-                    placeholder="+225 00 00 00 00 00"
-                    className="w-full border border-vert/20 bg-cream px-4 py-3 font-poppins text-sm text-black focus:outline-none focus:border-or transition-colors"
-                  />
-                </div>
+                {/* Téléphone */}
+                <TextField
+                  value={telephone}
+                  onChange={setTelephone}
+                  isRequired
+                  inputMode="tel"
+                  className="contact-field flex flex-col gap-2"
+                >
+                  <Label className={labelClass}>Téléphone *</Label>
+                  <Input placeholder="+225 00 00 00 00 00" className={fieldClass} />
+                </TextField>
 
-                <div className="contact-field">
-                  <label className="font-cinzel text-vert text-xs tracking-[0.2em] uppercase block mb-2">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={form.email}
-                    onChange={handleChange}
-                    placeholder="votre@email.com"
-                    className="w-full border border-vert/20 bg-cream px-4 py-3 font-poppins text-sm text-black focus:outline-none focus:border-or transition-colors"
-                  />
-                </div>
+                {/* Email */}
+                <TextField
+                  value={email}
+                  onChange={setEmail}
+                  type="email"
+                  className="contact-field flex flex-col gap-2"
+                >
+                  <Label className={labelClass}>Email</Label>
+                  <Input placeholder="votre@email.com" className={fieldClass} />
+                </TextField>
 
-                <div className="contact-field">
-                  <label className="font-cinzel text-vert text-xs tracking-[0.2em] uppercase block mb-2">
-                    Espace souhaité *
-                  </label>
-                  <select
-                    name="espace"
-                    value={form.espace}
-                    onChange={handleChange}
-                    required
-                    className="w-full border border-vert/20 bg-cream px-4 py-3 font-poppins text-sm text-black focus:outline-none focus:border-or transition-colors"
+                {/* Espace */}
+                <div className="contact-field flex flex-col gap-2">
+                  <label className={labelClass}>Espace souhaité *</label>
+                  <Select
+                    value={espace || null}
+                    onChange={(k) => setEspace(String(k))}
+                    placeholder="Sélectionner un espace"
+                    className="w-full"
                   >
-                    <option value="">Sélectionner un espace</option>
-                    {espaceOptions.map((opt) => (
-                      <option key={opt} value={opt}>{opt}</option>
-                    ))}
-                  </select>
+                    <Select.Trigger className={`${fieldClass} flex items-center justify-between`}>
+                      <Select.Value className="font-poppins text-sm text-black/70" />
+                      <Select.Indicator />
+                    </Select.Trigger>
+                    <Select.Popover className="z-50 bg-white border border-vert/20 shadow-lg rounded-none">
+                      <ListBox className="py-1 outline-none">
+                        {espaceOptions.map((opt) => (
+                          <ListBoxItem
+                            key={opt}
+                            id={opt}
+                            className="font-poppins text-sm text-black/70 px-4 py-2.5 cursor-pointer hover:bg-or/10 hover:text-vert outline-none data-focused:bg-or/10 data-focused:text-vert transition-colors"
+                          >
+                            {opt}
+                          </ListBoxItem>
+                        ))}
+                      </ListBox>
+                    </Select.Popover>
+                  </Select>
                 </div>
 
-                <div className="contact-field">
-                  <label className="font-cinzel text-vert text-xs tracking-[0.2em] uppercase block mb-2">
-                    Date envisagée
-                  </label>
-                  <input
-                    type="date"
-                    name="date"
-                    value={form.date}
-                    onChange={handleChange}
-                    className="w-full border border-vert/20 bg-cream px-4 py-3 font-poppins text-sm text-black focus:outline-none focus:border-or transition-colors"
-                  />
-                </div>
+                {/* Date */}
+                <TextField
+                  value={date}
+                  onChange={setDate}
+                  type="date"
+                  className="contact-field flex flex-col gap-2"
+                >
+                  <Label className={labelClass}>Date envisagée</Label>
+                  <Input type="date" className={fieldClass} />
+                </TextField>
 
-                <div className="contact-field">
-                  <label className="font-cinzel text-vert text-xs tracking-[0.2em] uppercase block mb-2">
-                    Nombre de personnes
-                  </label>
-                  <input
-                    type="number"
-                    name="personnes"
-                    value={form.personnes}
-                    onChange={handleChange}
-                    min="1"
-                    placeholder="Ex: 25"
-                    className="w-full border border-vert/20 bg-cream px-4 py-3 font-poppins text-sm text-black focus:outline-none focus:border-or transition-colors"
-                  />
-                </div>
+                {/* Nombre de personnes */}
+                <NumberField
+                  value={personnes}
+                  onChange={setPersonnes}
+                  minValue={1}
+                  className="contact-field flex flex-col gap-2"
+                >
+                  <Label className={labelClass}>Nombre de personnes</Label>
+                  <NumberField.Group className="flex border border-vert/20 bg-cream">
+                    <NumberField.DecrementButton className="px-3 py-3 text-vert hover:bg-or/10 transition-colors border-r border-vert/20 font-semibold">
+                      −
+                    </NumberField.DecrementButton>
+                    <NumberField.Input
+                      placeholder="Ex: 25"
+                      className="flex-1 bg-transparent px-3 py-3 font-poppins text-sm text-black focus:outline-none text-center"
+                    />
+                    <NumberField.IncrementButton className="px-3 py-3 text-vert hover:bg-or/10 transition-colors border-l border-vert/20 font-semibold">
+                      +
+                    </NumberField.IncrementButton>
+                  </NumberField.Group>
+                </NumberField>
 
-                <div className="contact-field md:col-span-2">
-                  <label className="font-cinzel text-vert text-xs tracking-[0.2em] uppercase block mb-2">
-                    Message / Détails
-                  </label>
-                  <textarea
-                    name="message"
-                    value={form.message}
-                    onChange={handleChange}
+                {/* Message */}
+                <TextField
+                  value={message}
+                  onChange={setMessage}
+                  className="contact-field md:col-span-2 flex flex-col gap-2"
+                >
+                  <Label className={labelClass}>Message / Détails</Label>
+                  <TextArea
                     rows={4}
                     placeholder="Décrivez votre événement, vos besoins particuliers..."
-                    className="w-full border border-vert/20 bg-cream px-4 py-3 font-poppins text-sm text-black focus:outline-none focus:border-or transition-colors resize-none"
+                    className={`${fieldClass} resize-none`}
                   />
-                </div>
+                </TextField>
               </div>
 
               {/* Submit */}
@@ -287,7 +291,7 @@ export default function Contact() {
                 </Button>
                 <p className="font-poppins text-black/40 text-xs">* Champs obligatoires</p>
               </div>
-            </form>
+            </Form>
           </div>
         </div>
       </div>

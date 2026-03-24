@@ -150,14 +150,15 @@ export default function Galerie() {
           className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
           onClick={() => setLightbox(null)}
         >
-          <button
-            className="absolute top-6 right-6 text-white/70 hover:text-or transition-colors"
-            onClick={() => setLightbox(null)}
+          <Button
+            onPress={() => setLightbox(null)}
+            className="absolute top-6 right-6 bg-transparent border-none shadow-none p-0 h-auto min-h-0 rounded-none text-white/70 hover:text-or transition-colors"
+            aria-label="Fermer"
           >
             <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
             </svg>
-          </button>
+          </Button>
           <div
             className="relative max-w-5xl w-full max-h-[85vh] aspect-video"
             onClick={(e) => e.stopPropagation()}

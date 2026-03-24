@@ -110,7 +110,7 @@ export default function Hero() {
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-white text-center px-6 pt-16">
 
         <div className="hero-logo w-16 h-16 md:w-20 md:h-20 relative mb-6">
-          <Image src="/logo.png" alt="Domaine Ambroise" fill sizes="80px" className="object-contain" loading="eager" />
+          <Image src="/icon.png" alt="Domaine Ambroise" fill sizes="80px" className="object-contain" loading="eager" />
         </div>
 
         <p className="hero-loc font-cinzel text-or text-xs md:text-sm tracking-[0.45em] uppercase mb-5">

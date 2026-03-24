@@ -52,9 +52,10 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
 
       {/* Center logo (above both curtains) */}
       <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 z-10">
+        {/* Icône palmier seule sur fond vert-deep */}
         <div ref={logoRef} className="relative w-20 h-20">
           <Image
-            src="/logo.png"
+            src="/icon.png"
             alt="Domaine Ambroise"
             fill
             sizes="80px"

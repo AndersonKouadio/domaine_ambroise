@@ -10,23 +10,19 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* Brand */}
           <div className="flex flex-col items-center md:items-start gap-4">
-            <div className="relative w-16 h-16">
+            {/* Logo horizontal fond sombre */}
+            <div className="relative w-44 h-12">
               <Image
-                src="/logo.png"
+                src="/logo_fond_noir.png"
                 alt="Domaine Ambroise"
                 fill
-                sizes="64px"
-                className="object-contain"
+                sizes="176px"
+                className="object-contain object-left md:object-left object-center"
               />
             </div>
-            <div>
-              <p className="font-cinzel text-or text-base tracking-[0.25em] font-semibold">
-                DOMAINE AMBROISE
-              </p>
-              <p className="text-xs text-white/50 tracking-widest mt-1">
-                Nature · Convivialité · Évasion · Élégance
-              </p>
-            </div>
+            <p className="text-xs text-white/50 tracking-widest">
+              Nature · Convivialité · Évasion · Élégance
+            </p>
             <p className="text-sm text-white/60 leading-relaxed text-center md:text-left max-w-xs">
               Un lieu où chaque instant devient un moment d&apos;exception.
             </p>

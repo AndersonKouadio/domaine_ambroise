@@ -71,23 +71,16 @@ export default function Navbar() {
             onPress={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             className={`${btnGhost} flex items-center gap-3 shrink-0`}
           >
-            <div className="relative w-10 h-10 md:w-12 md:h-12">
+            {/* Logo horizontal fond sombre (icône + texte intégré) */}
+            <div className="relative w-32 h-9 md:w-40 md:h-11">
               <Image
-                src="/logo.png"
+                src="/logo_fond_noir.png"
                 alt="Domaine Ambroise"
                 fill
-                sizes="48px"
-                className="object-contain"
+                sizes="160px"
+                className="object-contain object-left"
                 loading="eager"
               />
-            </div>
-            <div className="hidden sm:block">
-              <p className="font-cinzel text-or text-xs md:text-sm font-semibold tracking-[0.2em] leading-none">
-                DOMAINE
-              </p>
-              <p className="font-cinzel text-or text-[10px] md:text-xs tracking-[0.35em] leading-none mt-0.5">
-                AMBROISE
-              </p>
             </div>
           </Button>
 

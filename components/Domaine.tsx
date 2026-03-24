@@ -40,8 +40,12 @@ export default function Domaine() {
     // ── Desktop ────────────────────────────────────────────────────────────────
     mm.add("(min-width: 768px)", () => {
       // Header : enfants en stagger puis gold line qui se déploie depuis le centre
-      gsap.from(".domaine-header > :not(.gold-line)", {
+      gsap.from(".domaine-header > :not(.gold-line):not(.h2-mask-wrapper)", {
         opacity: 0, y: 50, stagger: 0.15, duration: 1, ease: "power3.out",
+        scrollTrigger: { trigger: ".domaine-header", start: "top 82%", once: true },
+      });
+      gsap.from(".domaine-header .section-h2-mask", {
+        yPercent: 105, duration: 1.2, ease: "power3.out",
         scrollTrigger: { trigger: ".domaine-header", start: "top 82%", once: true },
       });
       gsap.fromTo(".domaine-header .gold-line",
@@ -71,8 +75,12 @@ export default function Domaine() {
 
     // ── Mobile ─────────────────────────────────────────────────────────────────
     mm.add("(max-width: 767px)", () => {
-      gsap.from(".domaine-header > *", {
+      gsap.from(".domaine-header > :not(.h2-mask-wrapper)", {
         opacity: 0, y: 30, stagger: 0.1, duration: 0.7, ease: "power3.out",
+        scrollTrigger: { trigger: ".domaine-header", start: "top 85%", once: true },
+      });
+      gsap.from(".domaine-header .section-h2-mask", {
+        yPercent: 105, duration: 0.9, ease: "power3.out",
         scrollTrigger: { trigger: ".domaine-header", start: "top 85%", once: true },
       });
       gsap.from(".domaine-images", {
@@ -97,7 +105,9 @@ export default function Domaine() {
         {/* Header */}
         <div className="domaine-header text-center mb-20">
           <p className="font-cinzel text-or text-xs tracking-[0.45em] uppercase mb-4">Notre histoire</p>
-          <h2 className="font-cinzel text-4xl md:text-5xl text-vert font-semibold mb-6">Le Domaine Ambroise</h2>
+          <div className="overflow-hidden h2-mask-wrapper">
+            <h2 className="font-cinzel text-4xl md:text-5xl text-vert font-semibold mb-6 section-h2-mask">Le Domaine Ambroise</h2>
+          </div>
           <div className="gold-line w-32 mx-auto" />
         </div>
 

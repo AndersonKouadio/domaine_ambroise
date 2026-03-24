@@ -53,8 +53,12 @@ export default function Espaces() {
     // ── Desktop ────────────────────────────────────────────────────────────────
     mm.add("(min-width: 768px)", () => {
       // Header : stagger + gold line
-      gsap.from(".espaces-header > :not(.gold-line)", {
+      gsap.from(".espaces-header > :not(.gold-line):not(.h2-mask-wrapper)", {
         opacity: 0, y: 50, stagger: 0.15, duration: 1, ease: "power3.out",
+        scrollTrigger: { trigger: ".espaces-header", start: "top 82%", once: true },
+      });
+      gsap.from(".espaces-header .section-h2-mask", {
+        yPercent: 105, duration: 1.2, ease: "power3.out",
         scrollTrigger: { trigger: ".espaces-header", start: "top 82%", once: true },
       });
       gsap.fromTo(".espaces-header .gold-line",
@@ -92,8 +96,12 @@ export default function Espaces() {
 
     // ── Mobile ─────────────────────────────────────────────────────────────────
     mm.add("(max-width: 767px)", () => {
-      gsap.from(".espaces-header > *", {
+      gsap.from(".espaces-header > :not(.h2-mask-wrapper)", {
         opacity: 0, y: 30, stagger: 0.1, duration: 0.7, ease: "power3.out",
+        scrollTrigger: { trigger: ".espaces-header", start: "top 85%", once: true },
+      });
+      gsap.from(".espaces-header .section-h2-mask", {
+        yPercent: 105, duration: 0.9, ease: "power3.out",
         scrollTrigger: { trigger: ".espaces-header", start: "top 85%", once: true },
       });
       gsap.utils.toArray<HTMLElement>(".espace-row").forEach((row) => {
@@ -116,7 +124,9 @@ export default function Espaces() {
         {/* Header */}
         <div className="espaces-header text-center mb-20">
           <p className="font-cinzel text-or text-xs tracking-[0.45em] uppercase mb-4">Nos espaces</p>
-          <h2 className="font-cinzel text-4xl md:text-5xl text-vert font-semibold mb-6">Choisissez votre cadre</h2>
+          <div className="overflow-hidden h2-mask-wrapper">
+            <h2 className="font-cinzel text-4xl md:text-5xl text-vert font-semibold mb-6 section-h2-mask">Choisissez votre cadre</h2>
+          </div>
           <div className="gold-line w-32 mx-auto mb-6" />
           <p className="font-poppins text-black/55 max-w-xl mx-auto">
             Quatre espaces distincts pour des expériences uniques, de l&apos;intimité au grand rassemblement.

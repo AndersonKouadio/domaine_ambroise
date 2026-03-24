@@ -108,8 +108,12 @@ export default function Tarifs() {
   const sectionRef = useRef<HTMLElement>(null);
 
   useGSAP(() => {
-    gsap.from(".tarifs-header > *", {
+    gsap.from(".tarifs-header > :not(.h2-mask-wrapper)", {
       opacity: 0, y: 40, stagger: 0.15, duration: 0.9, ease: "power3.out",
+      scrollTrigger: { trigger: ".tarifs-header", start: "top 82%", once: true },
+    });
+    gsap.from(".tarifs-header .section-h2-mask", {
+      yPercent: 105, duration: 1.2, ease: "power3.out",
       scrollTrigger: { trigger: ".tarifs-header", start: "top 82%", once: true },
     });
     gsap.from(".tarifs-tabs", {
@@ -139,9 +143,11 @@ export default function Tarifs() {
         {/* Header */}
         <div className="tarifs-header text-center mb-16">
           <p className="font-cinzel text-or text-xs tracking-[0.4em] uppercase mb-4">Nos tarifs</p>
-          <h2 className="font-cinzel text-4xl md:text-5xl text-vert font-semibold mb-6">
-            Visites & Prestations
-          </h2>
+          <div className="overflow-hidden h2-mask-wrapper">
+            <h2 className="font-cinzel text-4xl md:text-5xl text-vert font-semibold mb-6 section-h2-mask">
+              Visites &amp; Prestations
+            </h2>
+          </div>
           <div className="gold-line w-32 mx-auto mb-6" />
           <p className="font-poppins text-black/60 max-w-lg mx-auto">
             Des tarifs transparents pour planifier votre séjour ou événement en toute sérénité.
@@ -269,7 +275,7 @@ export default function Tarifs() {
           </p>
           <Button
             onPress={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
-            className="font-cinzel border-2 border-vert text-vert! bg-transparent! text-xs font-semibold tracking-[0.2em] uppercase px-10 py-4 h-auto min-h-0 rounded-none hover:bg-vert! hover:text-or! transition-all duration-300"
+            className="font-cinzel border-2 border-vert text-vert! bg-transparent! text-xs font-semibold tracking-[0.2em] uppercase px-6 sm:px-10 py-3 sm:py-4 h-auto min-h-0 w-auto rounded-none hover:bg-vert! hover:text-or! transition-all duration-300"
           >
             Demander un devis personnalisé
           </Button>

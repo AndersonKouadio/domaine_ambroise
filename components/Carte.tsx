@@ -53,8 +53,12 @@ export default function Carte() {
 
   useGSAP(() => {
     // Header stagger
-    gsap.from(".carte-header > *", {
+    gsap.from(".carte-header > :not(.h2-mask-wrapper)", {
       opacity: 0, y: 40, stagger: 0.15, duration: 0.9, ease: "power3.out",
+      scrollTrigger: { trigger: ".carte-header", start: "top 82%", once: true },
+    });
+    gsap.from(".carte-header .section-h2-mask", {
+      yPercent: 105, duration: 1.2, ease: "power3.out",
       scrollTrigger: { trigger: ".carte-header", start: "top 82%", once: true },
     });
 
@@ -92,7 +96,9 @@ export default function Carte() {
         {/* Header */}
         <div className="carte-header text-center mb-20">
           <p className="font-cinzel text-or text-xs tracking-[0.4em] uppercase mb-4">Nos boissons</p>
-          <h2 className="font-cinzel text-4xl md:text-5xl text-white font-semibold mb-6">La Carte</h2>
+          <div className="overflow-hidden h2-mask-wrapper">
+            <h2 className="font-cinzel text-4xl md:text-5xl text-white font-semibold mb-6 section-h2-mask">La Carte</h2>
+          </div>
           <div className="gold-line w-32 mx-auto mb-6" />
           <p className="font-poppins text-white/60 max-w-md mx-auto">
             Une sélection soigneuse pour accompagner vos moments de convivialité.

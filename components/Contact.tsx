@@ -44,9 +44,13 @@ export default function Contact() {
   const [message, setMessage] = useState("");
 
   useGSAP(() => {
-    gsap.from(".contact-header > *", {
+    gsap.from(".contact-header > :not(.h2-mask-wrapper)", {
       opacity: 0, y: 40, stagger: 0.15, duration: 0.9, ease: "power3.out",
-      scrollTrigger: { trigger: ".contact-header", start: "top 82%" },
+      scrollTrigger: { trigger: ".contact-header", start: "top 82%", once: true },
+    });
+    gsap.from(".contact-header .section-h2-mask", {
+      yPercent: 105, duration: 1.2, ease: "power3.out",
+      scrollTrigger: { trigger: ".contact-header", start: "top 82%", once: true },
     });
     const mm = gsap.matchMedia();
 
@@ -80,6 +84,21 @@ export default function Contact() {
       opacity: 0, y: 20, stagger: 0.07, duration: 0.6, ease: "power3.out",
       scrollTrigger: { trigger: ".contact-field", start: "top 82%", once: true },
     });
+
+    // Parallax on contact photo (desktop only)
+    const mmParallax = gsap.matchMedia();
+    mmParallax.add("(min-width: 768px)", () => {
+      gsap.to(".contact-hero-img", {
+        yPercent: -18,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".contact-info",
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 1,
+        },
+      });
+    });
   }, { scope: sectionRef });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -108,9 +127,11 @@ export default function Contact() {
         {/* Header */}
         <div className="contact-header text-center mb-20">
           <p className="font-cinzel text-or text-xs tracking-[0.4em] uppercase mb-4">Réservation</p>
-          <h2 className="font-cinzel text-4xl md:text-5xl text-vert font-semibold mb-6">
-            Planifiez votre séjour
-          </h2>
+          <div className="overflow-hidden h2-mask-wrapper">
+            <h2 className="font-cinzel text-4xl md:text-5xl text-vert font-semibold mb-6 section-h2-mask">
+              Planifiez votre séjour
+            </h2>
+          </div>
           <div className="gold-line w-32 mx-auto mb-6" />
           <p className="font-poppins text-black/60 max-w-md mx-auto">
             Remplissez le formulaire et nous vous répondrons directement sur WhatsApp.
@@ -122,13 +143,15 @@ export default function Contact() {
           {/* Left: Contact info */}
           <div className="contact-info lg:col-span-2 flex flex-col gap-8">
             <div className="relative h-64 overflow-hidden">
-              <Image
-                src="/images/fleuve/9-IMG_5858.jpg"
-                alt="Domaine Ambroise - Contact"
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 40vw"
-              />
+              <div className="absolute inset-0 scale-110">
+                <Image
+                  src="/images/fleuve/9-IMG_5858.jpg"
+                  alt="Domaine Ambroise - Contact"
+                  fill
+                  className="object-cover contact-hero-img"
+                  sizes="(max-width: 1024px) 100vw, 40vw"
+                />
+              </div>
               <div className="absolute inset-0 bg-linear-to-t from-vert/80 to-transparent" />
               <div className="absolute bottom-6 left-6">
                 <p className="font-cinzel text-or text-sm">Domaine Ambroise</p>

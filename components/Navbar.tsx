@@ -1,50 +1,75 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
 import { Button } from "@heroui/react";
+import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 
-const btnGhost = "bg-transparent border-none shadow-none rounded-none p-0 h-auto min-h-0";
+const btnGhost =
+  "bg-transparent border-none shadow-none rounded-none p-0 h-auto min-h-0";
 
 const navLinks = [
-  { label: "Le Domaine", href: "#domaine" },
+  { label: "Le Domaine",  href: "#domaine" },
+  { label: "Activités",   href: "#activites" },
   { label: "Nos Espaces", href: "#espaces" },
-  { label: "Tarifs", href: "#tarifs" },
-  { label: "La Carte", href: "#carte" },
-  { label: "Galerie", href: "#galerie" },
-  { label: "Contact", href: "#contact" },
+  { label: "Tarifs",      href: "#tarifs" },
+  { label: "La Carte",    href: "#carte" },
+  { label: "Galerie",     href: "#galerie" },
+  { label: "Contact",     href: "#contact" },
 ];
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
+  useGSAP(() => {
+    const header = headerRef.current;
+    if (!header) return;
+
+    let lastY = 0;
+    let hidden = false;
+
+    ScrollTrigger.create({
+      trigger: document.body,
+      start: "top top",
+      end: "max",
+      onUpdate: (self) => {
+        const currentY = self.scroll();
+        const scrollingDown = currentY > lastY;
+        const pastThreshold = currentY > 80;
+
+        if (scrollingDown && pastThreshold && !hidden) {
+          gsap.to(header, { yPercent: -100, duration: 0.35, ease: "power2.in" });
+          hidden = true;
+        } else if (!scrollingDown && hidden) {
+          gsap.to(header, { yPercent: 0, duration: 0.45, ease: "power3.out" });
+          hidden = false;
+        }
+
+        lastY = currentY;
+      },
+    });
   }, []);
 
   const handleNavClick = (href: string) => {
     setMenuOpen(false);
-    const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
   };
+
+  const linkClass = `${btnGhost} font-poppins text-xs tracking-[0.15em] uppercase text-white/80 hover:text-or transition-colors duration-300`;
 
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled
-            ? "bg-vert/95 backdrop-blur-md shadow-lg shadow-black/20"
-            : "bg-transparent"
-        }`}
+        ref={headerRef}
+        className="fixed top-0 left-0 right-0 z-50 bg-vert-deep border-b border-or/15"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16 md:h-20">
+
           {/* Logo */}
           <Button
             onPress={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className={`${btnGhost} flex items-center gap-3 group shrink-0`}
+            className={`${btnGhost} flex items-center gap-3 shrink-0`}
           >
             <div className="relative w-10 h-10 md:w-12 md:h-12">
               <Image
@@ -67,19 +92,19 @@ export default function Navbar() {
           </Button>
 
           {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
+          <nav className="hidden lg:flex items-center gap-5 xl:gap-7">
             {navLinks.map((link) => (
               <Button
                 key={link.href}
                 onPress={() => handleNavClick(link.href)}
-                className={`${btnGhost} font-poppins text-white/90 text-xs tracking-[0.15em] uppercase hover:text-or transition-colors duration-300`}
+                className={linkClass}
               >
                 {link.label}
               </Button>
             ))}
           </nav>
 
-          {/* CTA Button */}
+          {/* CTA */}
           <div className="hidden lg:flex items-center">
             <Button
               onPress={() => handleNavClick("#contact")}
@@ -89,7 +114,7 @@ export default function Navbar() {
             </Button>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile hamburger */}
           <Button
             onPress={() => setMenuOpen(!menuOpen)}
             className={`${btnGhost} lg:hidden flex flex-col gap-1.5 p-2`}
@@ -102,21 +127,19 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile overlay menu */}
       <div
-        className={`fixed inset-0 z-40 bg-vert flex flex-col transition-all duration-500 ${
-          menuOpen
-            ? "opacity-100 pointer-events-auto"
-            : "opacity-0 pointer-events-none"
+        className={`fixed inset-0 z-40 bg-vert-deep flex flex-col transition-all duration-500 ${
+          menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
       >
-        <div className="flex flex-col items-center justify-center h-full gap-8 md:gap-10">
+        <div className="flex flex-col items-center justify-center h-full gap-8">
           {navLinks.map((link, i) => (
             <Button
               key={link.href}
               onPress={() => handleNavClick(link.href)}
-              className={`${btnGhost} font-cinzel text-white text-xl md:text-2xl tracking-[0.2em] uppercase hover:text-or transition-colors duration-300 animate-fade-in-up`}
-              style={{ animationDelay: `${i * 0.08}s` }}
+              className={`${btnGhost} font-cinzel text-white text-xl tracking-[0.2em] uppercase hover:text-or transition-colors duration-300`}
+              style={{ animationDelay: `${i * 0.07}s` }}
             >
               {link.label}
             </Button>

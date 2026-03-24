@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Cinzel, Poppins } from "next/font/google";
 import "./globals.css";
+import PageAnimations from "@/components/PageAnimations";
+import ScrollProgress from "@/components/ScrollProgress";
 
 const cinzel = Cinzel({
   subsets: ["latin"],
@@ -37,7 +39,11 @@ export default function RootLayout({
       lang="fr"
       className={`${cinzel.variable} ${poppins.variable} scroll-smooth`}
     >
-      <body className="min-h-screen antialiased">{children}</body>
+      <body className="min-h-screen antialiased">
+        <PageAnimations />
+        <ScrollProgress />
+        {children}
+      </body>
     </html>
   );
 }

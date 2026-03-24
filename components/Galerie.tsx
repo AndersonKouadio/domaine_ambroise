@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { Button } from "@heroui/react";
 import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
@@ -34,45 +34,87 @@ const categoryList = ["Tout", "Nature", "Espaces", "Personnes", "Événements"];
 
 export default function Galerie() {
   const sectionRef = useRef<HTMLElement>(null);
+  const imgRef = useRef<HTMLDivElement>(null);
   const [activeCategory, setActiveCategory] = useState("Tout");
-  const [lightbox, setLightbox] = useState<GalleryItem | null>(null);
+  const [lightboxIdx, setLightboxIdx] = useState<number | null>(null);
 
   const filtered =
     activeCategory === "Tout"
       ? photos
       : photos.filter((p) => p.category === activeCategory);
 
+  const isOpen = lightboxIdx !== null;
+  const current = isOpen ? filtered[lightboxIdx] : null;
+
+  // Animate image swap
+  const goTo = useCallback(
+    (nextIdx: number, dir: 1 | -1) => {
+      const el = imgRef.current;
+      if (!el) { setLightboxIdx(nextIdx); return; }
+      gsap.to(el, {
+        opacity: 0, x: -40 * dir, duration: 0.2, ease: "power2.in",
+        onComplete: () => {
+          setLightboxIdx(nextIdx);
+          gsap.fromTo(el, { opacity: 0, x: 40 * dir }, { opacity: 1, x: 0, duration: 0.3, ease: "power3.out" });
+        },
+      });
+    },
+    []
+  );
+
+  const prev = useCallback(() => {
+    if (lightboxIdx === null) return;
+    goTo((lightboxIdx - 1 + filtered.length) % filtered.length, -1);
+  }, [lightboxIdx, filtered.length, goTo]);
+
+  const next = useCallback(() => {
+    if (lightboxIdx === null) return;
+    goTo((lightboxIdx + 1) % filtered.length, 1);
+  }, [lightboxIdx, filtered.length, goTo]);
+
+  const close = useCallback(() => setLightboxIdx(null), []);
+
+  // Keyboard navigation
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "ArrowRight") next();
+      if (e.key === "ArrowLeft")  prev();
+      if (e.key === "Escape")     close();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [isOpen, next, prev, close]);
+
+  // Lock scroll when lightbox open
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [isOpen]);
+
   useGSAP(() => {
-    // Header
-    gsap.from(".galerie-header > *", {
+    gsap.from(".galerie-header > :not(.h2-mask-wrapper)", {
       opacity: 0, y: 40, stagger: 0.15, duration: 0.9, ease: "power3.out",
       scrollTrigger: { trigger: ".galerie-header", start: "top 82%", once: true },
     });
-
-    // Filter buttons
+    gsap.from(".galerie-header .section-h2-mask", {
+      yPercent: 105, duration: 1.2, ease: "power3.out",
+      scrollTrigger: { trigger: ".galerie-header", start: "top 82%", once: true },
+    });
     gsap.from(".galerie-filters", {
       opacity: 0, y: 30, duration: 0.8, ease: "power3.out",
       scrollTrigger: { trigger: ".galerie-filters", start: "top 85%", once: true },
     });
-
-    // Photos batch reveal
     ScrollTrigger.batch(".galerie-photo", {
       start: "top 88%",
       onEnter: (batch) =>
-        gsap.from(batch, {
-          opacity: 0,
-          scale: 0.92,
-          stagger: 0.06,
-          duration: 0.6,
-          ease: "power3.out",
-        }),
+        gsap.from(batch, { opacity: 0, scale: 0.92, stagger: 0.06, duration: 0.6, ease: "power3.out" }),
       once: true,
     });
   }, { scope: sectionRef });
 
   const handleFilterChange = (cat: string) => {
     setActiveCategory(cat);
-    // Animate new set of photos after React re-renders
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         gsap.fromTo(
@@ -91,9 +133,11 @@ export default function Galerie() {
         {/* Header */}
         <div className="galerie-header text-center mb-16">
           <p className="font-cinzel text-or text-xs tracking-[0.4em] uppercase mb-4">Galerie</p>
-          <h2 className="font-cinzel text-4xl md:text-5xl text-vert font-semibold mb-6">
-            Le Domaine en images
-          </h2>
+          <div className="overflow-hidden h2-mask-wrapper">
+            <h2 className="font-cinzel text-4xl md:text-5xl text-vert font-semibold mb-6 section-h2-mask">
+              Le Domaine en images
+            </h2>
+          </div>
           <div className="gold-line w-32 mx-auto" />
         </div>
 
@@ -114,7 +158,7 @@ export default function Galerie() {
           ))}
         </div>
 
-        {/* Masonry-style grid */}
+        {/* Masonry grid */}
         <div className="columns-2 md:columns-3 lg:columns-4 gap-3 space-y-3">
           {filtered.map((photo, i) => (
             <div
@@ -122,7 +166,7 @@ export default function Galerie() {
               className={`galerie-photo relative overflow-hidden cursor-pointer group break-inside-avoid ${
                 photo.span === "wide" ? "aspect-video" : photo.span === "tall" ? "aspect-[2/3]" : "aspect-square"
               }`}
-              onClick={() => setLightbox(photo)}
+              onClick={() => setLightboxIdx(i)}
             >
               <Image
                 src={photo.src}
@@ -145,35 +189,83 @@ export default function Galerie() {
       </div>
 
       {/* Lightbox */}
-      {lightbox && (
+      {isOpen && current && (
         <div
-          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
-          onClick={() => setLightbox(null)}
+          className="fixed inset-0 z-[60] bg-black/95 flex items-center justify-center"
+          onClick={close}
         >
+          {/* Close */}
           <Button
-            onPress={() => setLightbox(null)}
-            className="absolute top-6 right-6 bg-transparent border-none shadow-none p-0 h-auto min-h-0 rounded-none text-white/70 hover:text-or transition-colors"
+            onPress={close}
+            className="absolute top-5 right-5 bg-white/10 hover:bg-white/20 border-none shadow-none rounded-full w-10 h-10 min-h-0 p-0 flex items-center justify-center text-white transition-colors z-10"
             aria-label="Fermer"
           >
-            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </Button>
+
+          {/* Counter */}
+          <div className="absolute top-5 left-1/2 -translate-x-1/2 font-cinzel text-white/50 text-xs tracking-[0.3em]">
+            {(lightboxIdx! + 1).toString().padStart(2, "0")} / {filtered.length.toString().padStart(2, "0")}
+          </div>
+
+          {/* Prev */}
+          <Button
+            onPress={(e) => { prev(); }}
+            className="absolute left-3 md:left-6 bg-white/10 hover:bg-or/80 border-none shadow-none rounded-full w-11 h-11 min-h-0 p-0 flex items-center justify-center text-white hover:text-vert transition-all duration-200 z-10"
+            aria-label="Précédent"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 19l-7-7 7-7" />
+            </svg>
+          </Button>
+
+          {/* Image */}
           <div
-            className="relative max-w-5xl w-full max-h-[85vh] aspect-video"
+            ref={imgRef}
+            className="relative w-full h-full max-w-6xl max-h-[88vh] mx-16 md:mx-24"
             onClick={(e) => e.stopPropagation()}
           >
             <Image
-              src={lightbox.src}
-              alt={lightbox.alt}
+              src={current.src}
+              alt={current.alt}
               fill
               className="object-contain"
               sizes="100vw"
+              priority
             />
           </div>
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-center">
-            <p className="font-cinzel text-or text-xs tracking-[0.2em] uppercase">{lightbox.category}</p>
-            <p className="font-poppins text-white/70 text-sm mt-1">{lightbox.alt}</p>
+
+          {/* Next */}
+          <Button
+            onPress={(e) => { next(); }}
+            className="absolute right-3 md:right-6 bg-white/10 hover:bg-or/80 border-none shadow-none rounded-full w-11 h-11 min-h-0 p-0 flex items-center justify-center text-white hover:text-vert transition-all duration-200 z-10"
+            aria-label="Suivant"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" />
+            </svg>
+          </Button>
+
+          {/* Caption */}
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-center pointer-events-none">
+            <p className="font-cinzel text-or text-xs tracking-[0.25em] uppercase mb-1">{current.category}</p>
+            <p className="font-poppins text-white/60 text-sm">{current.alt}</p>
+          </div>
+
+          {/* Thumbnail strip */}
+          <div className="absolute bottom-16 left-1/2 -translate-x-1/2 flex gap-1.5 max-w-xs md:max-w-lg overflow-hidden pointer-events-none">
+            {filtered.map((_, i) => (
+              <div
+                key={i}
+                className={`h-0.5 flex-1 transition-all duration-300 ${
+                  i === lightboxIdx ? "bg-or" : "bg-white/20"
+                }`}
+              />
+            ))}
           </div>
         </div>
       )}

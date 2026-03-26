@@ -7,9 +7,11 @@ import { gsap, useGSAP } from "@/lib/gsap";
 
 const stats = [
   { value: 117, suffix: " km", label: "d'Abidjan" },
-  { value: 1000, suffix: "", label: "personnes accueillies" },
+  { value: 8346000, suffix: "", label: "visiteurs" },
   { value: 3, suffix: "", label: "espaces privatisables" },
 ];
+
+const fmt = (v: number) => new Intl.NumberFormat("fr-FR").format(v);
 
 export default function Domaine() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -26,11 +28,10 @@ export default function Domaine() {
         ease: "power2.out",
         scrollTrigger: { trigger: el, start: "top 85%", once: true },
         onUpdate() {
-          const v = Math.round(obj.val);
-          el.textContent = (v >= 1000 ? "1 000" : String(v)) + stat.suffix;
+          el.textContent = fmt(Math.round(obj.val)) + stat.suffix;
         },
         onComplete() {
-          el.textContent = (stat.value >= 1000 ? "1 000" : String(stat.value)) + stat.suffix;
+          el.textContent = fmt(stat.value) + stat.suffix;
         },
       });
     });
@@ -150,7 +151,7 @@ export default function Domaine() {
 
             <p className="font-poppins text-black/65 leading-relaxed">
               Entouré d&apos;une nature luxuriante, entre cocotiers, vastes espaces verts
-              et panorama apaisant sur l&apos;eau, le domaine offre une expérience immersive
+              et panorama apaisant sur le fleuve Bandama et le N&apos;zi, le domaine offre une expérience immersive
               où calme, beauté et élégance se rencontrent.
             </p>
 
@@ -160,7 +161,7 @@ export default function Domaine() {
                 <Card key={stat.label} className="text-center p-4 border border-or/20 bg-white/70 shadow-none rounded-none">
                   <p
                     data-stat={i}
-                    className="font-cinzel text-or text-xl md:text-2xl font-bold"
+                    className="font-cinzel text-or text-base md:text-lg font-bold leading-tight"
                   >
                     0{stat.suffix}
                   </p>
@@ -181,23 +182,13 @@ export default function Domaine() {
           </div>
         </div>
 
-        {/* Mission / Vision */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-or/20">
-          <div className="domaine-block bg-vert p-10 md:p-14">
-            <p className="font-cinzel text-or text-xs tracking-[0.3em] uppercase mb-4">Notre mission</p>
-            <p className="font-poppins text-white/85 leading-relaxed">
-              Offrir un espace unique où particuliers et entreprises peuvent vivre des moments d&apos;exception,
-              dans un cadre naturel prestigieux, en alliant confort, convivialité et qualité de service.
-            </p>
-          </div>
-          <div className="domaine-block bg-vert-second p-10 md:p-14">
-            <p className="font-cinzel text-or text-xs tracking-[0.3em] uppercase mb-4">Notre vision</p>
-            <p className="font-poppins text-white/85 leading-relaxed">
-              Devenir une référence incontournable en Afrique de l&apos;Ouest dans l&apos;accueil d&apos;événements
-              et de séjours en pleine nature, en incarnant un art de vivre alliant élégance, authenticité et
-              expérience immersive.
-            </p>
-          </div>
+        {/* Mission */}
+        <div className="domaine-block bg-vert p-10 md:p-14 text-center">
+          <p className="font-cinzel text-or text-xs tracking-[0.3em] uppercase mb-4">Notre mission</p>
+          <p className="font-poppins text-white/85 leading-relaxed max-w-2xl mx-auto">
+            Offrir un espace unique où particuliers et entreprises peuvent vivre des moments d&apos;exception,
+            dans un cadre naturel unique, en alliant confort, convivialité et qualité de service.
+          </p>
         </div>
       </div>
     </section>

@@ -16,7 +16,8 @@ import {
 import { Label } from "react-aria-components";
 import { gsap, useGSAP } from "@/lib/gsap";
 
-const WHATSAPP_NUMBER = "2250554020623";
+// Réservations → compte WhatsApp Charles (priorité)
+const WHATSAPP_NUMBER = "33603263285";
 
 const espaceOptions = [
   "Espace Terrain",
@@ -171,11 +172,8 @@ export default function Contact() {
 
               <div className="contact-card bg-white p-5 border-l-2 border-or">
                 <p className="font-cinzel text-vert text-xs tracking-[0.2em] uppercase mb-2">Téléphone</p>
-                <a href="tel:+2250555966100" className="font-poppins text-black/70 text-sm block hover:text-or transition-colors">
-                  05 55 96 61 00
-                </a>
-                <a href="tel:+2250505002228" className="font-poppins text-black/70 text-sm block hover:text-or transition-colors">
-                  05 05 00 22 28
+                <a href="tel:+2250715552695" className="font-poppins text-black/70 text-sm block hover:text-or transition-colors">
+                  +225 07 15 55 26 95 / +33 6 03 26 32 85
                 </a>
               </div>
 

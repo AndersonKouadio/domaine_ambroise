@@ -7,12 +7,12 @@ import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 const activities = [
   {
     id: "01",
-    title: "Baignade & Détente",
-    subtitle: "Se ressourcer au naturel",
+    title: "Canoë & Balade en Pirogue",
+    subtitle: "Explorer le Bandama",
     description:
-      "Profitez des berges verdoyantes du fleuve Bandama pour vous rafraîchir et vous ressourcer. Hamacs, espaces de détente et vue apaisante sur l'eau vous attendent.",
+      "Embarquez à bord d'une pirogue artisanale ou d'un canoë sur le fleuve Bandama. Pagayez en pleine nature, découvrez les berges verdoyantes, les rochers et l'île depuis l'eau.",
     image: "/images/fleuve/5-IMG_5790.jpg",
-    alt: "Berges du fleuve Bandama",
+    alt: "Canoë sur le fleuve Bandama",
   },
   {
     id: "02",
@@ -123,22 +123,24 @@ export default function Activites() {
 
         const overlay = card.querySelector<HTMLElement>(".act-mob-overlay");
 
-        // As the card sticks and the next card slides up, shrink + darken it
+        // will-change pour éviter les repaints sur mobile
+        gsap.set(card, { willChange: "transform" });
+
+        // scrub: 1 (avec inertie) = beaucoup plus fluide sur mobile que scrub: true
         gsap.timeline({
           scrollTrigger: {
             trigger: card,
-            start: `top top+=${STICKY_TOP}`,   // card just became sticky
-            end:   `bottom top+=${STICKY_TOP}`, // card's natural bottom reaches sticky line
-            scrub: true,
+            start: `top top+=${STICKY_TOP}`,
+            end:   `bottom top+=${STICKY_TOP}`,
+            scrub: 1,
           },
         })
           .to(card, {
-            scale: 0.88,
-            borderRadius: "16px",
+            scale: 0.9,
             transformOrigin: "top center",
             ease: "none",
           }, 0)
-          .to(overlay, { opacity: 0.5, ease: "none" }, 0);
+          .to(overlay, { opacity: 0.45, ease: "none" }, 0);
       });
 
       // Entrance animation for first card
@@ -266,13 +268,15 @@ export default function Activites() {
               }}
             >
               {/* Background image */}
-              <Image
-                src={act.image}
-                alt={act.alt}
-                fill
-                className="object-cover"
-                sizes="100vw"
-              />
+              <div className="absolute inset-0">
+                <Image
+                  src={act.image}
+                  alt={act.alt}
+                  fill
+                  className="object-cover"
+                  sizes="100vw"
+                />
+              </div>
 
               {/* Multi-layer gradient — rich and cinematic */}
               <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/30 to-transparent" />

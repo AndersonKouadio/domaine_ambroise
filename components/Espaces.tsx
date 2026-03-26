@@ -10,18 +10,20 @@ const espaces = [
     id: "terrain",
     title: "Espace Terrain",
     subtitle: "Grand air & liberté",
-    description: "Notre espace terrain vous offre une immersion totale dans la nature, avec une vue directe sur le fleuve Bandama. Idéal pour les pique-niques, les événements en plein air et les rassemblements conviviaux.",
+    description: "Notre espace terrain vous offre une immersion totale dans la nature, avec une vue directe sur le fleuve Bandama. Idéal pour les pique-niques, les événements en plein air et les grands rassemblements.",
     image: "/images/cocotier/IMG_5878.JPG",
-    features: ["Vue fleuve panoramique", "Tréteaux disponibles", "Jusqu'à 50 personnes", "Privatisation possible"],
+    features: ["Vue fleuve panoramique", "Tréteaux disponibles", "Jusqu'à 500 personnes", "Privatisation possible"],
+    startingPrice: "À partir de 10 000 F",
     accent: "#dda228",
   },
   {
     id: "cocotier",
     title: "Espace Cocotier",
     subtitle: "Ombre & sérénité",
-    description: "Sous les cocotiers majestueux, cet espace offre une ambiance tropicale unique. Profitez de l'ombre naturelle des palmiers pour vos réunions, célébrations et moments de détente.",
+    description: "Sous les cocotiers majestueux en bordure du fleuve, cet espace offre une ambiance tropicale unique. Profitez de l'ombre naturelle pour vos réunions, célébrations et moments de détente.",
     image: "/images/cocotier/3-IMG_5857.jpg",
-    features: ["Sous les palmiers", "Ambiance tropicale", "Jusqu'à 50 personnes", "Piste & bordure"],
+    features: ["Ambiance tropicale", "En bordure du fleuve", "Jusqu'à 500 personnes", "Piste & bordure"],
+    startingPrice: "À partir de 15 000 F",
     accent: "#3e8a63",
   },
   {
@@ -30,16 +32,18 @@ const espaces = [
     subtitle: "Authenticité & confort",
     description: "Nos bungalows traditionnels offrent un cadre intime et authentique. Parfaits pour les séjours, les petits groupes et les événements qui demandent une touche de caractère et d'élégance naturelle.",
     image: "/images/bungalow/2-IMG_5740.jpg",
-    features: ["Architecture traditionnelle", "Confort moderne", "Jusqu'à 50 personnes", "Piste & bordure"],
+    features: ["Architecture traditionnelle", "Confort moderne", "Jusqu'à 250 personnes", "Piste & bordure"],
+    startingPrice: "À partir de 15 000 F",
     accent: "#dda228",
   },
   {
     id: "ile",
     title: "L'Île & Détente",
     subtitle: "Évasion & exclusivité",
-    description: "Une île accessible en traversée, pour une expérience véritablement hors du commun. Hamacs, salons privatifs et vue imprenable sur le Bandama. L'évasion ultime au cœur de la nature.",
+    description: "Accessible en pirogue artisanale, notre île est le seul endroit d'où vous pouvez observer à la fois le fleuve Bandama et le N'Zi. Hamacs, salons privatifs et vue imprenable sur les deux cours d'eau.",
     image: "/images/fleuve/7-IMG_5829.jpg",
-    features: ["Traversée incluse", "Salons privatifs", "Location de hamacs", "Vue 360° fleuve"],
+    features: ["Pirogue artisanale", "Salons privatifs", "Location de hamacs", "Vue Bandama & N'Zi"],
+    startingPrice: "À partir de 2 000 F",
     accent: "#3e8a63",
   },
 ];
@@ -173,14 +177,17 @@ export default function Espaces() {
                   ))}
                 </ul>
 
-                <a
-                  href="#tarifs"
-                  className="inline-flex items-center gap-3 font-cinzel text-xs tracking-[0.2em] uppercase font-semibold group/link w-fit"
-                  style={{ color: espace.accent }}
-                >
-                  Voir les tarifs
-                  <span className="h-px w-8 group-hover/link:w-16 transition-all duration-400" style={{ backgroundColor: espace.accent }} />
-                </a>
+                <div className="flex items-center justify-between">
+                  <a
+                    href="#tarifs"
+                    className="inline-flex items-center gap-3 font-cinzel text-xs tracking-[0.2em] uppercase font-semibold group/link w-fit"
+                    style={{ color: espace.accent }}
+                  >
+                    Voir les tarifs
+                    <span className="h-px w-8 group-hover/link:w-16 transition-all duration-400" style={{ backgroundColor: espace.accent }} />
+                  </a>
+                  <span className="font-poppins text-xs text-black/40">{espace.startingPrice}</span>
+                </div>
               </div>
             </div>
           ))}

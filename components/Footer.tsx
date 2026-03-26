@@ -64,20 +64,14 @@ export default function Footer() {
               <p>117 km d&apos;Abidjan – Fleuve Bandama</p>
               <div className="gold-line my-4" />
               <a
-                href="tel:+2250555966100"
+                href="tel:+2250715552695"
                 className="block hover:text-or transition-colors"
               >
-                05 55 96 61 00
-              </a>
-              <a
-                href="tel:+2250505002228"
-                className="block hover:text-or transition-colors"
-              >
-                05 05 00 22 28
+                +225 07 15 55 26 95 / +33 6 03 26 32 85
               </a>
               <div className="pt-2">
                 <a
-                  href="https://wa.me/2250554020623"
+                  href="https://wa.me/2250715552695"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-or hover:text-or-light transition-colors font-medium"

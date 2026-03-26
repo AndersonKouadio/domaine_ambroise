@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
 
-const WHATSAPP = "2250554020623";
+const WHATSAPP = "2250715552695";
 
 export default function CtaBanner() {
   const sectionRef  = useRef<HTMLElement>(null);

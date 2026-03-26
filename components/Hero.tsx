@@ -8,10 +8,10 @@ import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 const scrollTo = (hash: string) =>
   document.querySelector(hash)?.scrollIntoView({ behavior: "smooth" });
 
+// Premier slide (cocotier) retiré sur demande — on garde les 3 autres
 const slides = [
-  { src: "/images/cocotier/3-IMG_5857.jpg", alt: "Vue panoramique du fleuve Bandama" },
   { src: "/images/cocotier/1-IMG_5755.jpg", alt: "Espace cocotier du Domaine Ambroise" },
-  { src: "/images/fleuve/4-IMG_5725.jpg", alt: "Rochers et nature au bord du Bandama" },
+  { src: "/images/fleuve/4-IMG_5725.jpg",   alt: "Rochers et nature au bord du Bandama" },
   { src: "/images/bungalow/1-IMG_5714.jpg", alt: "Bungalow traditionnel du domaine" },
 ];
 
@@ -41,9 +41,8 @@ export default function Hero() {
 
   // GSAP entrance + parallax
   useGSAP(() => {
-    const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-
-    // Staggered entrance
+    // Entrance timeline — pausée, lancée après le loader
+    const tl = gsap.timeline({ defaults: { ease: "power3.out" }, paused: true });
     tl.from(".hero-logo",   { opacity: 0, scale: 0.7, duration: 1 })
       .from(".hero-loc",    { opacity: 0, y: 20, duration: 0.7 }, "-=0.4")
       .from(".hero-title-1",{ opacity: 0, y: 60, duration: 1 },   "-=0.3")
@@ -51,6 +50,25 @@ export default function Hero() {
       .from(".hero-sub",    { opacity: 0, y: 30, duration: 0.8 }, "-=0.4")
       .from(".hero-cta",    { opacity: 0, y: 25, stagger: 0.15, duration: 0.7 }, "-=0.4")
       .from(".hero-dots",   { opacity: 0, duration: 0.5 }, "-=0.3");
+
+    const play = () => tl.play();
+    let observer: MutationObserver | null = null;
+
+    // Démarre quand domaine-loading est retiré du <html> (loader ou fallback 6s)
+    if (!document.documentElement.classList.contains("domaine-loading")) {
+      play();
+    } else {
+      observer = new MutationObserver(() => {
+        if (!document.documentElement.classList.contains("domaine-loading")) {
+          observer!.disconnect();
+          play();
+        }
+      });
+      observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ["class"],
+      });
+    }
 
     // Parallax on scroll: bg moves slower than scroll
     gsap.to(bgRef.current, {
@@ -75,6 +93,8 @@ export default function Hero() {
         scrub: true,
       },
     });
+
+    return () => observer?.disconnect();
   }, { scope: sectionRef });
 
   return (

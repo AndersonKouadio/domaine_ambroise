@@ -43,7 +43,7 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 z-[9999] pointer-events-none overflow-hidden"
+      className="loader-overlay fixed inset-0 z-[9999] pointer-events-none overflow-hidden"
     >
       {/* Top curtain */}
       <div ref={topRef} className="absolute inset-x-0 top-0 h-1/2 bg-vert-deep" />

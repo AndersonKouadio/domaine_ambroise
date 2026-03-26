@@ -275,7 +275,7 @@ export default function Tarifs() {
           </p>
           <Button
             onPress={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
-            className="font-cinzel border-2 border-vert text-vert! bg-transparent! text-xs font-semibold tracking-[0.2em] uppercase px-6 sm:px-10 py-3 sm:py-4 h-auto min-h-0 w-auto rounded-none hover:bg-vert! hover:text-or! transition-all duration-300"
+            className="font-cinzel border-2 border-vert text-vert! bg-transparent! text-xs font-semibold tracking-[0.08em] sm:tracking-[0.2em] uppercase px-6 sm:px-10 py-3 sm:py-4 h-auto min-h-0 w-auto rounded-none hover:bg-vert! hover:text-or! transition-all duration-300"
           >
             Demander un devis personnalisé
           </Button>

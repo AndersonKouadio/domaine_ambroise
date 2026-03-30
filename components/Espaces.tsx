@@ -29,7 +29,7 @@ const espaces = [
     title: "Espace Bungalow",
     subtitle: "Authenticité & confort",
     description: "Nos bungalows traditionnels offrent un cadre intime et authentique. Parfaits pour les séjours, les petits groupes et les événements qui demandent une touche de caractère et d'élégance naturelle.",
-    image: "/images/bungalow/2-IMG_5740.jpg",
+    image: "/images/bungalow/1-IMG_5714.jpg",
     features: ["Architecture traditionnelle", "Confort moderne", "Jusqu'à 250 personnes", "Piste & bordure"],
     accent: "#dda228",
   },

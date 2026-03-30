@@ -7,7 +7,7 @@ import { gsap, useGSAP } from "@/lib/gsap";
 
 const stats = [
   { value: 117, suffix: " km", label: "d'Abidjan" },
-  { value: 8346000, suffix: "", label: "visiteurs" },
+  { value: 1367000, suffix: "", label: "visiteurs" },
   { value: 3, suffix: "", label: "espaces privatisables" },
 ];
 

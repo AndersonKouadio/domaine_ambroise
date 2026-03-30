@@ -20,7 +20,7 @@ const activities = [
     subtitle: "L'évasion exclusive",
     description:
       "Embarquez pour une traversée vers notre île privée accessible uniquement depuis le Domaine. Salons privatifs, hamacs et panorama 360° sur le Bandama.",
-    image: "/images/fleuve/7-IMG_5829.jpg",
+    image: "/images/personne/image6.jpg",
     alt: "L'île sur le Bandama",
   },
   {
@@ -29,7 +29,7 @@ const activities = [
     subtitle: "Sous les cocotiers",
     description:
       "Installez-vous sous nos cocotiers majestueux avec vos proches. Tréteaux, espaces verts et ambiance tropicale pour des moments de partage inoubliables.",
-    image: "/images/personne/image10.jpg",
+    image: "/images/personne/image12.jpg",
     alt: "Pique-nique sous les cocotiers",
   },
   {

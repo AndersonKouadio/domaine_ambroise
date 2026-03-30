@@ -15,6 +15,7 @@ import {
 } from "@heroui/react";
 import { Label } from "react-aria-components";
 import { gsap, useGSAP } from "@/lib/gsap";
+import { MapPin, Phone, Clock } from "lucide-react";
 
 // Réservations → compte WhatsApp Charles (priorité)
 const WHATSAPP_NUMBER = "33603263285";
@@ -162,7 +163,10 @@ export default function Contact() {
 
             <div className="space-y-4">
               <div className="contact-card bg-white p-5 border-l-2 border-or">
-                <p className="font-cinzel text-vert text-xs tracking-[0.2em] uppercase mb-2">Localisation</p>
+                <div className="flex items-center gap-2 mb-2">
+                  <MapPin className="w-4 h-4 text-or" />
+                  <p className="font-cinzel text-vert text-xs tracking-[0.2em] uppercase">Localisation</p>
+                </div>
                 <p className="font-poppins text-black/70 text-sm leading-relaxed">
                   Tiassalé, Côte d&apos;Ivoire<br />
                   117 km d&apos;Abidjan<br />
@@ -171,7 +175,10 @@ export default function Contact() {
               </div>
 
               <div className="contact-card bg-white p-5 border-l-2 border-or">
-                <p className="font-cinzel text-vert text-xs tracking-[0.2em] uppercase mb-2">Téléphone</p>
+                <div className="flex items-center gap-2 mb-2">
+                  <Phone className="w-4 h-4 text-or" />
+                  <p className="font-cinzel text-vert text-xs tracking-[0.2em] uppercase">Téléphone</p>
+                </div>
                 <a href="tel:+2250715552695" className="font-poppins text-black/70 text-sm block hover:text-or transition-colors">
                   +225 07 15 55 26 95 / +33 6 03 26 32 85
                 </a>

@@ -1,3 +1,6 @@
+import Script from "next/script";
+import PageAnimations from "@/components/PageAnimations";
+import ScrollProgress from "@/components/ScrollProgress";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Domaine from "@/components/Domaine";
@@ -12,6 +15,11 @@ import Footer from "@/components/Footer";
 export default function Home() {
   return (
     <>
+      <Script id="domaine-loading" strategy="beforeInteractive">
+        {`document.documentElement.classList.add('domaine-loading')`}
+      </Script>
+      <PageAnimations />
+      <ScrollProgress />
       <Navbar />
       <main>
         <Hero />

@@ -12,8 +12,6 @@ const navLinks = [
   { label: "Le Domaine",  href: "#domaine" },
   { label: "Activités",   href: "#activites" },
   { label: "Nos Espaces", href: "#espaces" },
-  { label: "Tarifs",      href: "#tarifs" },
-  { label: "La Carte",    href: "#carte" },
   { label: "Galerie",     href: "#galerie" },
   { label: "Contact",     href: "#contact" },
 ];

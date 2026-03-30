@@ -11,7 +11,7 @@ const activities = [
     subtitle: "Explorer le Bandama",
     description:
       "Embarquez à bord d'une pirogue artisanale ou d'un canoë sur le fleuve Bandama. Pagayez en pleine nature, découvrez les berges verdoyantes, les rochers et l'île depuis l'eau.",
-    image: "/images/fleuve/5-IMG_5790.jpg",
+    image: "/images/personne/canoe2.jpeg",
     alt: "Canoë sur le fleuve Bandama",
   },
   {
@@ -29,7 +29,7 @@ const activities = [
     subtitle: "Sous les cocotiers",
     description:
       "Installez-vous sous nos cocotiers majestueux avec vos proches. Tréteaux, espaces verts et ambiance tropicale pour des moments de partage inoubliables.",
-    image: "/images/cocotier/3-IMG_5857.jpg",
+    image: "/images/personne/image10.jpg",
     alt: "Pique-nique sous les cocotiers",
   },
   {
@@ -38,7 +38,7 @@ const activities = [
     subtitle: "Vos plus beaux événements",
     description:
       "Mariages, anniversaires, baptêmes, soirées d'entreprise — nos espaces se transforment en décor d'exception pour tous vos moments festifs jusqu'à 1 000 personnes.",
-    image: "/images/personne/1-img (1).jpg",
+    image: "/images/personne/image11.jpg",
     alt: "Fête et célébration au domaine",
   },
   {
@@ -47,7 +47,7 @@ const activities = [
     subtitle: "Un décor naturel unique",
     description:
       "Un cadre exceptionnel pour vos shootings photo, tournages de clips et projets artistiques. La lumière dorée et la nature du Bandama comme toile de fond.",
-    image: "/images/bungalow/1-IMG_5714.jpg",
+    image: "/images/personne/3-img (4).jpg",
     alt: "Cadre naturel pour la création",
   },
 ];

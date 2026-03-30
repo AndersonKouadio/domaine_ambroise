@@ -6,7 +6,7 @@ import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 
 const moments = [
   {
-    time: "10h",
+    time: "9h",
     title: "Arrivée & Accueil",
     desc: "Bienvenue dans un cadre hors du commun",
     image: "/images/cocotier/IMG_5878.JPG",
@@ -15,7 +15,7 @@ const moments = [
     time: "12h",
     title: "Déjeuner sous les cocotiers",
     desc: "Saveurs et ombre tropicale au bord du Bandama",
-    image: "/images/cocotier/2-IMG_5757.jpg",
+    image: "/images/personne/9-IMG_5764.jpg",
   },
   {
     time: "15h",
@@ -24,16 +24,16 @@ const moments = [
     image: "/images/fleuve/7-IMG_5829.jpg",
   },
   {
+    time: "17h",
+    title: "Bain de Soleil",
+    desc: "Détente au bord du fleuve, sous les derniers rayons du jour",
+    image: "/images/personne/3-img (4).jpg",
+  },
+  {
     time: "18h",
     title: "Coucher de soleil",
     desc: "Le Bandama s'embrase de mille nuances d'or",
     image: "/images/fleuve/8-IMG_5831.jpg",
-  },
-  {
-    time: "20h",
-    title: "Soirée & Magie",
-    desc: "La nuit au Domaine vous appartient",
-    image: "/images/personne/3-img (4).jpg",
   },
 ];
 

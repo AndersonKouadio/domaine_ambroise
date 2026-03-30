@@ -192,6 +192,20 @@ export default function Contact() {
                 </div>
               </a>
             </div>
+
+            {/* Google Maps */}
+            <div className="contact-card overflow-hidden">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3968.754235150112!2d-4.820158999999999!3d5.8901129999999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfc091974a738d25%3A0x7822e4284721546!2sDomaine%20Ambroise!5e0!3m2!1sfr!2sci!4v1774892299440!5m2!1sfr!2sci"
+                width="100%"
+                height="250"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Domaine Ambroise - Google Maps"
+              />
+            </div>
           </div>
 
           {/* Right: Form */}

@@ -10,12 +10,12 @@ const scrollTo = (hash: string) =>
 
 // Premier slide (cocotier) retiré sur demande — on garde les 3 autres
 const slides = [
-  { src: "/images/cocotier/1-IMG_5755.jpg", alt: "Espace cocotier du Domaine Ambroise" },
+  { src: "/images/personne/image7.jpg",     alt: "Moments de vie au Domaine Ambroise" },
   { src: "/images/fleuve/4-IMG_5725.jpg",   alt: "Rochers et nature au bord du Bandama" },
   { src: "/images/bungalow/1-IMG_5714.jpg", alt: "Bungalow traditionnel du domaine" },
 ];
 
-const words = ["Nature", "Convivialité", "Évasion", "Élégance"];
+const words = ["Nature", "Convivialité", "Évasion"];
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);

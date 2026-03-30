@@ -19,7 +19,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Domaine Ambroise – Nature · Convivialité · Évasion · Élégance",
+  title: "Domaine Ambroise – Nature · Convivialité · Évasion",
   description:
     "Au bord du fleuve Bandama à Tiassalé, le Domaine Ambroise vous accueille dans un cadre naturel unique pour vos événements, séjours et moments de détente.",
   metadataBase: new URL("https://www.domaineambroise.com"),

@@ -28,6 +28,17 @@ const photos: GalleryItem[] = [
   { src: "/images/info/2-IMG_5651.jpg", alt: "Espace événement", category: "Événements" },
   { src: "/images/fleuve/8-IMG_5831.jpg", alt: "Coucher de soleil sur le fleuve", category: "Nature", span: "wide" },
   { src: "/images/bungalow/4-IMG_5745.jpg", alt: "Bungalow côté nature", category: "Espaces" },
+  { src: "/images/personne/image2.jpg", alt: "Visiteurs au domaine", category: "Personnes", span: "tall" },
+  { src: "/images/personne/image3.jpg", alt: "Moments de convivialité", category: "Personnes" },
+  { src: "/images/personne/image4.jpg", alt: "Détente au bord du fleuve", category: "Personnes", span: "wide" },
+  { src: "/images/personne/image5.jpg", alt: "Balade au domaine", category: "Personnes" },
+  { src: "/images/personne/image6.jpg", alt: "Sourires et partage", category: "Personnes" },
+  { src: "/images/personne/image7.jpg", alt: "Ambiance tropicale", category: "Personnes" },
+  { src: "/images/personne/image8.jpg", alt: "Journée en groupe", category: "Personnes", span: "tall" },
+  { src: "/images/personne/image9.jpg", alt: "Escapade nature", category: "Personnes" },
+  { src: "/images/personne/image10.jpg", alt: "Famille au domaine", category: "Personnes", span: "wide" },
+  { src: "/images/personne/image11.jpg", alt: "Rires et souvenirs", category: "Personnes" },
+  { src: "/images/personne/image12.jpg", alt: "Au cœur du domaine", category: "Personnes" },
 ];
 
 const categoryList = ["Tout", "Nature", "Espaces", "Personnes", "Événements"];

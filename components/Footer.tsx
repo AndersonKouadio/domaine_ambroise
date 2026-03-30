@@ -21,7 +21,7 @@ export default function Footer() {
               />
             </div>
             <p className="text-xs text-white/50 tracking-widest">
-              Nature · Convivialité · Évasion · Élégance
+              Nature · Convivialité · Évasion
             </p>
             <p className="text-sm text-white/60 leading-relaxed text-center md:text-left max-w-xs">
               Un lieu où chaque instant devient un moment d&apos;exception.
@@ -37,8 +37,6 @@ export default function Footer() {
               {[
                 ["Le Domaine", "#domaine"],
                 ["Nos Espaces", "#espaces"],
-                ["Tarifs", "#tarifs"],
-                ["La Carte", "#carte"],
                 ["Galerie", "#galerie"],
                 ["Contact", "#contact"],
               ].map(([label, href]) => (

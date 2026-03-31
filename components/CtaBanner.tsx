@@ -151,7 +151,7 @@ export default function CtaBanner() {
       {/* Palm leaf — top-right, medium */}
       <div
         ref={leaf2Ref}
-        className="absolute -right-10 top-0 w-56 h-56 opacity-[0.07] pointer-events-none rotate-[165deg]"
+        className="absolute -right-10 top-0 w-56 h-56 opacity-[0.07] pointer-events-none rotate-165"
         aria-hidden="true"
       >
         <svg viewBox="0 0 160 260" fill="none">
@@ -186,7 +186,7 @@ export default function CtaBanner() {
       <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
         <p
           ref={subtitleRef}
-          className="font-cinzel text-or text-xs tracking-[0.55em] uppercase mb-8"
+          className="font-cinzel text-or text-xs md:text-base tracking-[0.55em] uppercase mb-8"
         >
           Réservation
         </p>

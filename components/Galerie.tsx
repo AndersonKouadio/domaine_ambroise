@@ -149,7 +149,7 @@ export default function Galerie() {
 
         {/* Header */}
         <div className="galerie-header text-center mb-16">
-          <p className="font-cinzel text-or text-xs tracking-[0.4em] uppercase mb-4">Galerie</p>
+          <p className="font-cinzel text-or text-xs md:text-base tracking-[0.4em] uppercase mb-4">Galerie</p>
           <div className="overflow-hidden h2-mask-wrapper">
             <h2 className="font-cinzel text-4xl md:text-5xl text-vert font-semibold mb-6 section-h2-mask">
               Le Domaine en images

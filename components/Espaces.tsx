@@ -12,7 +12,7 @@ const espaces = [
     subtitle: "Grand air & liberté",
     description: "Notre espace terrain vous offre une immersion totale dans la nature, avec une vue directe sur le fleuve Bandama. Idéal pour les pique-niques, les événements en plein air et les grands rassemblements.",
     image: "/images/cocotier/IMG_5878.JPG",
-    features: ["Vue fleuve panoramique", "Tréteaux disponibles", "Jusqu'à 500 personnes", "Privatisation possible"],
+    features: ["Vue panoramique plage et palmiers", "Jusqu'à 500 personnes", "Privatisation possible"],
     accent: "#dda228",
   },
   {
@@ -21,16 +21,16 @@ const espaces = [
     subtitle: "Ombre & sérénité",
     description: "Sous les cocotiers majestueux en bordure du fleuve, cet espace offre une ambiance tropicale unique. Profitez de l'ombre naturelle pour vos réunions, célébrations et moments de détente.",
     image: "/images/cocotier/1-IMG_5755.jpg",
-    features: ["Ambiance tropicale", "En bordure du fleuve", "Jusqu'à 500 personnes", "Piste & bordure"],
+    features: ["Ambiance tropicale", "En bordure du fleuve", "Jusqu'à 500 personnes"],
     accent: "#3e8a63",
   },
   {
     id: "bungalow",
     title: "Espace Bungalow",
     subtitle: "Authenticité & confort",
-    description: "Nos bungalows traditionnels offrent un cadre intime et authentique. Parfaits pour les séjours, les petits groupes et les événements qui demandent une touche de caractère et d'élégance naturelle.",
+    description: "Nos bungalows traditionnels offrent un cadre intime et authentique. Parfaits pour les moments qui demandent une touche de caractère et d'élégance naturelle.",
     image: "/images/bungalow/1-IMG_5714.jpg",
-    features: ["Architecture traditionnelle", "Confort moderne", "Jusqu'à 250 personnes", "Piste & bordure"],
+    features: ["Architecture traditionnelle", "Confort moderne", "Jusqu'à 250 personnes"],
     accent: "#dda228",
   },
   {
@@ -123,12 +123,12 @@ export default function Espaces() {
 
         {/* Header */}
         <div className="espaces-header text-center mb-20">
-          <p className="font-cinzel text-or text-xs tracking-[0.45em] uppercase mb-4">Nos espaces</p>
+          <p className="font-cinzel text-or text-xs md:text-base tracking-[0.45em] uppercase mb-4">Nos espaces</p>
           <div className="overflow-hidden h2-mask-wrapper">
             <h2 className="font-cinzel text-4xl md:text-5xl text-vert font-semibold mb-6 section-h2-mask">Choisissez votre cadre</h2>
           </div>
           <div className="gold-line w-32 mx-auto mb-6" />
-          <p className="font-poppins text-black/55 max-w-xl mx-auto">
+          <p className="font-poppins text-black/55 max-w-xl text-sm md:text-lg mx-auto">
             Quatre espaces distincts pour des expériences uniques, de l&apos;intimité au grand rassemblement.
           </p>
         </div>
@@ -141,7 +141,7 @@ export default function Espaces() {
               className="espace-row grid grid-cols-1 lg:grid-cols-2 gap-0 overflow-hidden group"
             >
               {/* Image */}
-              <div className={`espace-img-container relative h-64 sm:h-80 lg:h-full lg:min-h-[440px] overflow-hidden ${i % 2 === 1 ? "lg:order-2" : ""}`}>
+              <div className={`espace-img-container relative h-64 sm:h-80 lg:h-full lg:min-h-110 overflow-hidden ${i % 2 === 1 ? "lg:order-2" : ""}`}>
                 <Image
                   src={espace.image}
                   alt={espace.title}
@@ -149,15 +149,15 @@ export default function Espaces() {
                   className="object-cover group-hover:scale-106 transition-transform duration-700"
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-black/40 to-transparent" />
-                <div className="absolute top-6 left-6 font-cinzel text-white/20 text-7xl font-bold leading-none select-none">
+                <div className="absolute inset-0 bg-lenear-to-t lg:bg-lenear-to-r from-black/40 to-transparent" />
+                <div className="absolute top-6 left-6 font-cinzel text-white/80 text-7xl font-bold leading-none select-none">
                   0{i + 1}
                 </div>
               </div>
 
               {/* Content */}
-              <div className={`espace-content flex flex-col justify-center p-8 md:p-12 lg:p-14 bg-cream min-h-[440px] ${i % 2 === 1 ? "lg:order-1" : ""}`}>
-                <p className="font-cinzel text-xs tracking-[0.3em] uppercase mb-2" style={{ color: espace.accent }}>
+              <div className={`espace-content flex flex-col justify-center p-8 md:p-12 bg-cream min-h-110 ${i % 2 === 1 ? "lg:order-1" : ""}`}>
+                <p className="font-cinzel text-xs md:text-base tracking-[0.3em] uppercase mb-2" style={{ color: espace.accent }}>
                   {espace.subtitle}
                 </p>
                 <h3 className="font-cinzel text-3xl md:text-4xl text-vert font-semibold mb-4">{espace.title}</h3>
@@ -168,7 +168,7 @@ export default function Espaces() {
                   {espace.features.map((f) => (
                     <li key={f} className="flex items-center gap-2">
                       <div className="w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: espace.accent }} />
-                      <span className="font-poppins text-sm text-black/65">{f}</span>
+                      <span className="font-poppins text-sm md:text-base text-black/65">{f}</span>
                     </li>
                   ))}
                 </ul>
@@ -182,7 +182,7 @@ export default function Espaces() {
         <div className="espaces-banner mt-4 bg-vert p-10 md:p-14 text-center relative overflow-hidden">
           <div className="absolute inset-0 opacity-[0.04]"
             style={{ backgroundImage: "repeating-linear-gradient(45deg, #dda228, #dda228 1px, transparent 1px, transparent 24px)" }} />
-          <p className="font-cinzel text-or text-xs tracking-[0.3em] uppercase mb-3 relative">Privatisation</p>
+          <p className="font-cinzel text-or text-xs md:text-base tracking-[0.3em] uppercase mb-3 relative">Privatisation</p>
           <h3 className="font-cinzel text-white text-3xl md:text-4xl font-semibold mb-4 relative">
             Jusqu&apos;à <span className="text-or">1 000 personnes</span>
           </h3>
@@ -192,7 +192,7 @@ export default function Espaces() {
           </p>
           <Button
             onPress={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
-            className="font-cinzel bg-or! text-vert! text-xs font-bold tracking-[0.2em] uppercase px-10 py-4 rounded-none hover:bg-or-light! h-auto min-h-0 transition-all duration-300 relative"
+            className="font-cinzel bg-or! text-vert! text-sm md:text-lg font-bold tracking-[0.2em] uppercase px-10 py-4 rounded-none hover:bg-or-light! h-auto min-h-0 transition-all duration-300 relative"
           >
             Demander un devis
           </Button>

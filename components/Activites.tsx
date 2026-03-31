@@ -46,7 +46,7 @@ const activities = [
     title: "Photo & Création",
     subtitle: "Un décor naturel unique",
     description:
-      "Un cadre exceptionnel pour vos shootings photo, tournages de clips et projets artistiques. La lumière dorée et la nature du Bandama comme toile de fond.",
+      "Un cadre exceptionnel pour vos shootings photo, tournages de clips et projets artistiques.",
     image: "/images/personne/3-img (4).jpg",
     alt: "Cadre naturel pour la création",
   },
@@ -164,7 +164,7 @@ export default function Activites() {
         <div className="col-span-2 flex flex-col justify-center px-14 xl:px-20 py-20 bg-cream z-10">
 
           <div className="act-header mb-14">
-            <p className="font-cinzel text-or text-xs tracking-[0.45em] uppercase mb-4">
+            <p className="font-cinzel text-or text-xs md:text-base tracking-[0.45em] uppercase mb-4">
               Expériences
             </p>
             <h2 className="overflow-hidden">
@@ -206,7 +206,7 @@ export default function Activites() {
               <p
                 key={act.id}
                 data-act-desc={i}
-                className={`absolute inset-0 font-poppins text-black/60 text-sm leading-relaxed ${
+                className={`absolute inset-0 font-poppins text-black/60 text-sm md:text-lg leading-relaxed ${
                   i === 0 ? "opacity-100" : "opacity-0"
                 }`}
                 style={{ transform: i === 0 ? "translateY(0)" : "translateY(12px)" }}

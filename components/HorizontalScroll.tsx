@@ -112,7 +112,7 @@ export default function HorizontalScroll() {
       <div className="hidden lg:block">
         {/* Floating header */}
         <div className="absolute top-10 left-14 xl:left-20 z-20">
-          <p className="font-cinzel text-or text-xs tracking-[0.45em] uppercase mb-2">
+          <p className="font-cinzel text-or text-base tracking-[0.45em] uppercase mb-2">
             Immersion
           </p>
           <h2 className="font-cinzel text-white text-4xl font-semibold">
@@ -143,14 +143,14 @@ export default function HorizontalScroll() {
 
               {/* Content */}
               <div className="absolute bottom-16 left-14 xl:left-20 max-w-lg">
-                <p className="font-cinzel text-or/70 text-xs tracking-[0.45em] uppercase mb-3">
+                <p className="font-cinzel text-or/90 text-lg tracking-[0.45em] uppercase mb-3">
                   {m.time}
                 </p>
                 <h3 className="font-cinzel text-white text-4xl xl:text-5xl font-semibold mb-3 leading-tight">
                   {m.title}
                 </h3>
                 <div className="w-12 h-px bg-or/60 mb-4" />
-                <p className="font-poppins text-white/60 text-base">{m.desc}</p>
+                <p className="font-poppins text-white/60 text-lg">{m.desc}</p>
               </div>
 
               {/* Card number watermark */}
@@ -200,13 +200,13 @@ export default function HorizontalScroll() {
               />
               <div className="absolute inset-0 bg-linear-to-t from-black/85 via-black/20 to-transparent" />
               <div className="absolute bottom-5 left-5 right-5">
-                <p className="font-cinzel text-or/70 text-[10px] tracking-[0.35em] uppercase mb-1">
+                <p className="font-cinzel text-or/90 text-sm tracking-[0.35em] uppercase mb-1">
                   {m.time}
                 </p>
                 <h3 className="font-cinzel text-white text-xl font-semibold leading-tight">
                   {m.title}
                 </h3>
-                <p className="font-poppins text-white/55 text-xs mt-1">{m.desc}</p>
+                <p className="font-poppins text-white/55 text-sm mt-1">{m.desc}</p>
               </div>
             </div>
           ))}

@@ -105,7 +105,7 @@ export default function Domaine() {
 
         {/* Header */}
         <div className="domaine-header text-center mb-20">
-          <p className="font-cinzel text-or text-xs tracking-[0.45em] uppercase mb-4">Notre histoire</p>
+          <p className="font-cinzel text-or text-xs md:text-base tracking-[0.45em] uppercase mb-4">Notre histoire</p>
           <div className="overflow-hidden h2-mask-wrapper">
             <h2 className="font-cinzel text-4xl md:text-5xl text-vert font-semibold mb-6 section-h2-mask">Le Domaine Ambroise</h2>
           </div>
@@ -116,7 +116,7 @@ export default function Domaine() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-24">
 
           {/* Images */}
-          <div className="domaine-images relative grid grid-cols-2 gap-3 h-[480px]">
+          <div className="domaine-images relative grid grid-cols-2 gap-3 h-120">
             <div className="domaine-img relative col-span-1 row-span-2 overflow-hidden">
               <Image src="/images/fleuve/5-IMG_5790.jpg" alt="Le fleuve Bandama" fill
                 className="object-cover hover:scale-105 transition-transform duration-700"
@@ -139,7 +139,7 @@ export default function Domaine() {
           {/* Text */}
           <div className="domaine-text flex flex-col gap-6">
             <div>
-              <p className="font-cinzel text-or text-sm tracking-[0.2em] uppercase mb-3">Un cadre naturel unique</p>
+              <p className="font-cinzel text-or text-xs md:text-base tracking-[0.2em] uppercase mb-3">Un cadre naturel unique</p>
               <p className="font-poppins text-black/80 text-lg leading-relaxed">
                 Situé à Tiassalé, en bordure du majestueux fleuve Bandama,
                 le <strong className="text-vert">Domaine Ambroise </strong> est un lieu d&apos;exception dédié
@@ -149,23 +149,17 @@ export default function Domaine() {
 
             <div className="gold-line" />
 
-            <p className="font-poppins text-black/65 leading-relaxed">
-              Entouré d&apos;une nature luxuriante, entre cocotiers, vastes espaces verts
-              et panorama apaisant sur le fleuve Bandama et le N&apos;zi, le domaine offre une expérience immersive
-              où calme, beauté et élégance se rencontrent.
-            </p>
-
             {/* Stats with counter */}
             <div className="grid grid-cols-3 gap-4 mt-2">
               {stats.map((stat, i) => (
                 <Card key={stat.label} className="text-center p-4 border border-or/20 bg-white/70 shadow-none rounded-none">
                   <p
                     data-stat={i}
-                    className="font-cinzel text-or text-base md:text-lg font-bold leading-tight"
+                    className="font-cinzel text-or text-lg md:text-2xl font-bold leading-tight"
                   >
                     0{stat.suffix}
                   </p>
-                  <p className="font-poppins text-vert text-xs mt-1 leading-tight">{stat.label}</p>
+                  <p className="font-poppins text-vert text-xs md:text-sm mt-1 leading-tight">{stat.label}</p>
                 </Card>
               ))}
             </div>
@@ -175,7 +169,7 @@ export default function Domaine() {
               {["Accès direct au fleuve", "Cocotiers & espaces verts", "Atmosphère tropicale", "Rochers naturels"].map((f) => (
                 <div key={f} className="flex items-center gap-2">
                   <div className="w-1.5 h-1.5 rounded-full bg-or shrink-0" />
-                  <p className="font-poppins text-sm text-black/65">{f}</p>
+                  <p className="font-poppins text-sm md:text-base text-black/65">{f}</p>
                 </div>
               ))}
             </div>
@@ -184,10 +178,9 @@ export default function Domaine() {
 
         {/* Mission */}
         <div className="domaine-block bg-vert p-10 md:p-14 text-center">
-          <p className="font-cinzel text-or text-xs tracking-[0.3em] uppercase mb-4">Notre mission</p>
-          <p className="font-poppins text-white/85 leading-relaxed max-w-2xl mx-auto">
-            Offrir un espace unique où particuliers et entreprises peuvent vivre des moments d&apos;exception,
-            dans un cadre naturel unique, en alliant confort, convivialité et qualité de service.
+          <p className="font-cinzel text-or text-xs md:text-base tracking-[0.3em] uppercase mb-4">Notre mission</p>
+          <p className="font-poppins text-white/85 leading-relaxed text-sm md:text-lg max-w-2xl mx-auto">
+            Offrir un espace unique où particuliers et entreprises peuvent vivre des moments d&apos;exception.
           </p>
         </div>
       </div>

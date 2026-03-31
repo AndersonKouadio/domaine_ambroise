@@ -10,8 +10,8 @@ const scrollTo = (hash: string) =>
 
 // Premier slide (cocotier) retiré sur demande — on garde les 3 autres
 const slides = [
-  { src: "/images/fleuve/4-IMG_5725.jpg",   alt: "Rochers et nature au bord du Bandama" },
-  { src: "/images/personne/image10.jpg",     alt: "Balade en pirogue sur le Bandama" },
+  { src: "/images/fleuve/4-IMG_5725.jpg", alt: "Rochers et nature au bord du Bandama" },
+  { src: "/images/personne/image10.jpg", alt: "Balade en pirogue sur le Bandama" },
   { src: "/images/bungalow/1-IMG_5714.jpg", alt: "Bungalow traditionnel du domaine" },
 ];
 
@@ -43,13 +43,13 @@ export default function Hero() {
   useGSAP(() => {
     // Entrance timeline — pausée, lancée après le loader
     const tl = gsap.timeline({ defaults: { ease: "power3.out" }, paused: true });
-    tl.from(".hero-logo",   { opacity: 0, scale: 0.7, duration: 1 })
-      .from(".hero-loc",    { opacity: 0, y: 20, duration: 0.7 }, "-=0.4")
-      .from(".hero-title-1",{ opacity: 0, y: 60, duration: 1 },   "-=0.3")
-      .from(".hero-title-2",{ opacity: 0, y: 60, duration: 1 },   "-=0.7")
-      .from(".hero-sub",    { opacity: 0, y: 30, duration: 0.8 }, "-=0.4")
-      .from(".hero-cta",    { opacity: 0, y: 25, stagger: 0.15, duration: 0.7 }, "-=0.4")
-      .from(".hero-dots",   { opacity: 0, duration: 0.5 }, "-=0.3");
+    tl.from(".hero-logo", { opacity: 0, scale: 0.7, duration: 1 })
+      .from(".hero-loc", { opacity: 0, y: 20, duration: 0.7 }, "-=0.4")
+      .from(".hero-title-1", { opacity: 0, y: 60, duration: 1 }, "-=0.3")
+      .from(".hero-title-2", { opacity: 0, y: 60, duration: 1 }, "-=0.7")
+      .from(".hero-sub", { opacity: 0, y: 30, duration: 0.8 }, "-=0.4")
+      .from(".hero-cta", { opacity: 0, y: 25, stagger: 0.15, duration: 0.7 }, "-=0.4")
+      .from(".hero-dots", { opacity: 0, duration: 0.5 }, "-=0.3");
 
     const play = () => tl.play();
     let observer: MutationObserver | null = null;
@@ -129,11 +129,11 @@ export default function Hero() {
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-white text-center px-6 pt-16">
 
-        <div className="hero-logo w-16 h-16 md:w-20 md:h-20 relative mb-6">
-          <Image src="/icon.png" alt="Domaine Ambroise" fill sizes="80px" className="object-contain" loading="eager" />
+        <div className="hero-logo w-20 h-20 md:w-24 md:h-24 relative mb-6">
+          <Image src="/icon.png" alt="Domaine Ambroise" fill sizes="128px" className="object-contain" loading="eager" />
         </div>
 
-        <p className="hero-loc font-cinzel text-or text-xs md:text-sm tracking-[0.45em] uppercase mb-5">
+        <p className="hero-loc font-cinzel text-or text-xs md:text-base tracking-[0.45em] uppercase mb-5">
           Tiassalé · Côte d&apos;Ivoire
         </p>
 
@@ -147,13 +147,13 @@ export default function Hero() {
         {/* Animated word */}
         <div className="hero-sub h-7 mb-10 flex items-center justify-center gap-3">
           <div className="w-10 h-px bg-or/70" />
-          <span className={`font-poppins text-white/80 text-sm tracking-[0.35em] uppercase transition-all duration-450 ${wordVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2"}`}>
+          <span className={`font-poppins text-white/80 text-xs md:text-base tracking-[0.35em] uppercase transition-all duration-450 ${wordVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2"}`}>
             {words[wordIdx]}
           </span>
           <div className="w-10 h-px bg-or/70" />
         </div>
 
-        <p className="hero-sub font-poppins text-white/70 text-sm md:text-base max-w-lg leading-relaxed mb-12">
+        <p className="hero-sub font-poppins text-white/70 text-sm md:text-lg max-w-lg leading-relaxed mb-12">
           Un espace d&apos;exception au bord du fleuve Bandama,
           <br className="hidden md:block" /> à seulement 117 km d&apos;Abidjan.
         </p>

@@ -10,7 +10,7 @@ const scrollTo = (hash: string) =>
 
 // Premier slide (cocotier) retiré sur demande — on garde les 3 autres
 const slides = [
-  { src: "/images/fleuve/10-IMG.jpg", alt: "Rochers et nature au bord du Bandama" },
+  { src: "/images/fleuve/4-IMG_5725.jpg", alt: "Rochers et nature au bord du Bandama" },
   { src: "/images/cocotier/img5.jpg", alt: "Balade en pirogue sur le Bandama" },
   { src: "/images/bungalow/1-IMG_5714.jpg", alt: "Bungalow traditionnel du domaine" },
   { src: "/images/cocotier/3-img3.jpg", alt: "Balade en pirogue sur le Bandama" },

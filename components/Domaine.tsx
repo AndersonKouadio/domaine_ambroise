@@ -51,8 +51,10 @@ export default function Domaine() {
       });
       gsap.fromTo(".domaine-header .gold-line",
         { scaleX: 0, transformOrigin: "center" },
-        { scaleX: 1, duration: 1.2, ease: "power3.inOut", delay: 0.5,
-          scrollTrigger: { trigger: ".domaine-header", start: "top 82%", once: true } }
+        {
+          scaleX: 1, duration: 1.2, ease: "power3.inOut", delay: 0.5,
+          scrollTrigger: { trigger: ".domaine-header", start: "top 82%", once: true }
+        }
       );
 
       // Images : stagger scale-settle cinématique sur chaque container
@@ -180,8 +182,7 @@ export default function Domaine() {
         <div className="domaine-block bg-vert p-10 md:p-14 text-center">
           <p className="font-cinzel text-or text-xs md:text-base tracking-[0.3em] uppercase mb-4">Notre mission</p>
           <p className="font-poppins text-white/85 leading-relaxed text-sm md:text-lg max-w-2xl mx-auto">
-            Offrir un espace unique où particuliers et entreprises peuvent vivre des moments d&apos;exception.
-          </p>
+            Offrir un lieu d&apos;exception où particuliers et entreprises vivent des expériences uniques.</p>
         </div>
       </div>
     </section>

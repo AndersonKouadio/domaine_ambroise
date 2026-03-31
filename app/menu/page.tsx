@@ -5,7 +5,7 @@ import { FileText, MessageCircle, Globe } from "lucide-react";
 export const metadata: Metadata = {
   title: "Tarifs Boissons et Espaces – Domaine Ambroise",
   description:
-    "",
+    "Consultez la carte des boissons, les tarifs des espaces et prestations du Domaine Ambroise à Tiassalé.",
   robots: { index: false, follow: false },
 };
 
@@ -43,7 +43,7 @@ export default function MenuPage() {
           />
         </div>
         <h1 className="font-cinzel text-vert text-2xl md:text-3xl font-semibold tracking-wider text-center">
-          Menu & Tarifs
+          Tarifs Boissons & Espaces 
         </h1>
         <div className="w-16 h-0.5 bg-or mt-4" />
         <p className="font-poppins text-black/40 text-xs tracking-widest mt-3">
@@ -63,10 +63,7 @@ export default function MenuPage() {
 
       {/* Mobile — bouton direct vers le PDF */}
       <div className="flex md:hidden flex-1 flex-col items-center justify-center gap-6 px-6 pb-10">
-        <p className="font-poppins text-black/50 text-sm text-center leading-relaxed max-w-xs">
-          Consultez notre carte des boissons, les tarifs des espaces et nos
-          prestations.
-        </p>
+       
         <a
           href="/docs/pricing.pdf"
           target="_blank"
@@ -74,7 +71,7 @@ export default function MenuPage() {
           className="inline-flex items-center gap-3 font-cinzel bg-or text-vert text-xs font-bold tracking-[0.15em] uppercase px-8 py-4 hover:bg-or-light transition-colors duration-300"
         >
           <FileText className="w-4 h-4 shrink-0" />
-          Voir le Menu & Tarifs
+          Voir les Tarifs
         </a>
 
         <a

@@ -39,7 +39,6 @@ const photos: GalleryItem[] = [
   { src: "/images/personne/image10.jpg", alt: "Famille au domaine", category: "Personnes", span: "wide" },
   { src: "/images/personne/image11.jpg", alt: "Rires et souvenirs", category: "Personnes" },
   { src: "/images/personne/image12.jpg", alt: "Au cœur du domaine", category: "Personnes" },
-  { src: "/images/personne/canoe2.jpeg", alt: "Canoë sur le Bandama", category: "Personnes" },
   { src: "/images/personne/6-IMG_5724.jpg", alt: "Convivialité au domaine", category: "Personnes" },
   { src: "/images/personne/7-IMG_5729.jpg", alt: "Détente en groupe", category: "Personnes", span: "tall" },
   { src: "/images/personne/8-IMG_5761.jpg", alt: "Moments partagés", category: "Personnes" },

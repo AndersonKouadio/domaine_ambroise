@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Domaine Ambroise – Un lieu où chaque instant devient un moment d'exception",
     description:
-      "Un espace de détente et d'événements au bord du fleuve Bandama, Tiassalé, Côte d'Ivoire. Nature · Convivialité · Évasion · Élégance.",
+      "Un espace de détente et d'événements au bord du fleuve Bandama, Tiassalé, Côte d'Ivoire. Nature · Convivialité · Évasion.",
     type: "website",
     url: "https://www.domaineambroise.com",
     siteName: "Domaine Ambroise",

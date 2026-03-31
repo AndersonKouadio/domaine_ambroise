@@ -128,7 +128,7 @@ export default function Domaine() {
                 sizes="(max-width: 768px) 50vw, 25vw" />
             </div>
             <div className="domaine-img relative overflow-hidden">
-              <Image src="/images/personne/image9.jpg" alt="Les cocotiers" fill
+              <Image src="/images/cocotier/2-img4.jpg" alt="Les cocotiers" fill
                 className="object-cover hover:scale-105 transition-transform duration-700"
                 sizes="(max-width: 768px) 50vw, 25vw" />
             </div>

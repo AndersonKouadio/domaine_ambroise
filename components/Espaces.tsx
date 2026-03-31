@@ -7,11 +7,11 @@ import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 
 const espaces = [
   {
-    id: "terrain",
-    title: "Espace Terrain",
+    id: "parking",
+    title: "Espace Parking",
     subtitle: "Grand air & liberté",
-    description: "Notre espace terrain vous offre une immersion totale dans la nature, avec une vue directe sur le fleuve Bandama. Idéal pour les pique-niques, les événements en plein air et les grands rassemblements.",
-    image: "/images/cocotier/IMG_5878.JPG",
+    description: "Notre espace parking vous offre une immersion totale dans la nature, avec une vue directe sur le fleuve Bandama. Idéal pour les pique-niques, les événements en plein air et les grands rassemblements.",
+    image: "/images/cocotier/1-img2.jpg",
     features: ["Vue panoramique plage et palmiers","Possibilité d’activités sportives", "Jusqu'à 500 personnes", "Privatisation possible"],
     accent: "#dda228",
   },

@@ -8,7 +8,7 @@ type PricingRow = { label: string; price: string };
 
 const visitesData: { title: string; icon: string; rows: PricingRow[] }[] = [
   {
-    title: "Espace Terrain",
+    title: "Espace Parking",
     icon: "☀️",
     rows: [
       { label: "1 à 10 pers. (2 tréteaux)", price: "10 000 F" },
@@ -46,7 +46,7 @@ const privatisationData: PricingRow[] = [
   { label: "Domaine Entier (Accès total)", price: "400 000 F" },
   { label: "Espace Cocotier (Piste & bordure)", price: "200 000 F" },
   { label: "Espace Bungalow (Piste & bordure)", price: "130 000 F" },
-  { label: "Espace Terrain", price: "100 000 F" },
+  { label: "Espace Parking", price: "100 000 F" },
 ];
 
 const ileData: PricingRow[] = [

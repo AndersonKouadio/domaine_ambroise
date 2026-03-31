@@ -21,7 +21,7 @@ import { MapPin, Phone, Clock } from "lucide-react";
 const WHATSAPP_NUMBER = "33603263285";
 
 const espaceOptions = [
-  "Espace Terrain",
+  "Espace Parking",
   "Espace Cocotier",
   "Espace Bungalow",
   "L'Île & Détente",

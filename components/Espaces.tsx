@@ -12,7 +12,7 @@ const espaces = [
     subtitle: "Grand air & liberté",
     description: "Notre espace terrain vous offre une immersion totale dans la nature, avec une vue directe sur le fleuve Bandama. Idéal pour les pique-niques, les événements en plein air et les grands rassemblements.",
     image: "/images/cocotier/IMG_5878.JPG",
-    features: ["Vue panoramique plage et palmiers", "Jusqu'à 500 personnes", "Privatisation possible"],
+    features: ["Vue panoramique plage et palmiers","Possibilité d’activités sportives", "Jusqu'à 500 personnes", "Privatisation possible"],
     accent: "#dda228",
   },
   {
@@ -21,7 +21,7 @@ const espaces = [
     subtitle: "Ombre & sérénité",
     description: "Sous les cocotiers majestueux en bordure du fleuve, cet espace offre une ambiance tropicale unique. Profitez de l'ombre naturelle pour vos réunions, célébrations et moments de détente.",
     image: "/images/cocotier/1-IMG_5755.jpg",
-    features: ["Ambiance tropicale", "En bordure du fleuve", "Jusqu'à 500 personnes"],
+    features: ["Ambiance tropicale", "En bordure du fleuve", "Jusqu'à 500 personnes","Vue sur le fleuve bandama & Piste de danse"],
     accent: "#3e8a63",
   },
   {
@@ -30,7 +30,7 @@ const espaces = [
     subtitle: "Authenticité & confort",
     description: "Nos bungalows traditionnels offrent un cadre intime et authentique. Parfaits pour les moments qui demandent une touche de caractère et d'élégance naturelle.",
     image: "/images/bungalow/1-IMG_5714.jpg",
-    features: ["Architecture traditionnelle", "Confort moderne", "Jusqu'à 250 personnes"],
+    features: ["Architecture traditionnelle", "Confort moderne", "Jusqu'à 250 personnes","Vue plongeante sur le fleuve Bandama"],
     accent: "#dda228",
   },
   {

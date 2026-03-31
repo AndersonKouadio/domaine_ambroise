@@ -3,9 +3,9 @@ import Image from "next/image";
 import { FileText, MessageCircle, Globe } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Menu & Tarifs – Domaine Ambroise",
+  title: "Tarifs Boissons et Espaces – Domaine Ambroise",
   description:
-    "Consultez la carte des boissons, les tarifs des espaces et prestations du Domaine Ambroise à Tiassalé.",
+    "",
   robots: { index: false, follow: false },
 };
 

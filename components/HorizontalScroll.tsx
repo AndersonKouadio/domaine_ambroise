@@ -9,7 +9,7 @@ const moments = [
     time: "9h",
     title: "Arrivée & Accueil",
     desc: "Bienvenue dans un cadre hors du commun",
-    image: "/images/cocotier/IMG_5878.JPG",
+    image: "/images/personne/6-IMG_5724.jpg",
   },
   {
     time: "12h",

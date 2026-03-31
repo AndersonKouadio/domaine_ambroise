@@ -7,15 +7,6 @@ import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 const activities = [
   {
     id: "01",
-    title: "Canoë & Balade en Pirogue",
-    subtitle: "Explorer le Bandama",
-    description:
-      "Embarquez à bord d'une pirogue artisanale ou d'un canoë sur le fleuve Bandama. Pagayez en pleine nature, découvrez les berges verdoyantes, les rochers et l'île depuis l'eau.",
-    image: "/images/personne/canoe2.jpeg",
-    alt: "Canoë sur le fleuve Bandama",
-  },
-  {
-    id: "02",
     title: "Traversée vers l'Île",
     subtitle: "L'évasion exclusive",
     description:
@@ -24,16 +15,16 @@ const activities = [
     alt: "L'île sur le Bandama",
   },
   {
-    id: "03",
+    id: "02",
     title: "Pique-nique & Convivialité",
     subtitle: "Sous les cocotiers",
     description:
       "Installez-vous sous nos cocotiers majestueux avec vos proches. Tréteaux, espaces verts et ambiance tropicale pour des moments de partage inoubliables.",
-    image: "/images/personne/img1.jpg",
+    image: "/images/personne/image12.jpg",
     alt: "Pique-nique sous les cocotiers",
   },
   {
-    id: "04",
+    id: "03",
     title: "Fêtes & Célébrations",
     subtitle: "Vos plus beaux événements",
     description:
@@ -42,7 +33,7 @@ const activities = [
     alt: "Fête et célébration au domaine",
   },
   {
-    id: "05",
+    id: "04",
     title: "Photo & Création",
     subtitle: "Un décor naturel unique",
     description:

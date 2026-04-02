@@ -144,7 +144,7 @@ export default function Navbar() {
             </div>
             <div className="w-px h-5 bg-white/15" />
             <Button
-              onPress={() => handleNavClick("#contact")}
+              onPress={() => handleNavClick("#contact-form")}
               className="font-cinzel bg-or! text-vert! text-xs font-semibold tracking-[0.15em] uppercase px-6 py-2.5 rounded-none hover:bg-or-light! transition-colors duration-300 h-auto min-h-0"
             >
               Réserver
@@ -183,7 +183,7 @@ export default function Navbar() {
           ))}
 
           <Button
-            onPress={() => handleNavClick("#contact")}
+            onPress={() => handleNavClick("#contact-form")}
             className="mt-4 font-cinzel bg-or! text-vert! text-sm font-bold tracking-[0.2em] uppercase px-10 py-4 rounded-none hover:bg-or-light! transition-colors duration-300 h-auto min-h-0"
           >
             Réserver

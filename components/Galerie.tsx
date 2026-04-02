@@ -1,9 +1,12 @@
 "use client";
 
-import { useRef, useState, useEffect, useCallback } from "react";
+import { useRef, useState, useEffect, useCallback, useMemo } from "react";
 import Image from "next/image";
 import { Button } from "@heroui/react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
+
+const ITEMS_PER_PAGE = 8;
 
 type GalleryItem = {
   src: string;
@@ -53,11 +56,16 @@ export default function Galerie() {
   const imgRef = useRef<HTMLDivElement>(null);
   const [activeCategory, setActiveCategory] = useState("Tout");
   const [lightboxIdx, setLightboxIdx] = useState<number | null>(null);
+  const [page, setPage] = useState(0);
+  const gridRef = useRef<HTMLDivElement>(null);
 
-  const filtered =
-    activeCategory === "Tout"
-      ? photos
-      : photos.filter((p) => p.category === activeCategory);
+  const filtered = useMemo(
+    () => activeCategory === "Tout" ? photos : photos.filter((p) => p.category === activeCategory),
+    [activeCategory]
+  );
+
+  const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
+  const paged = filtered.slice(page * ITEMS_PER_PAGE, (page + 1) * ITEMS_PER_PAGE);
 
   const isOpen = lightboxIdx !== null;
   const current = isOpen ? filtered[lightboxIdx] : null;
@@ -129,17 +137,29 @@ export default function Galerie() {
     });
   }, { scope: sectionRef });
 
-  const handleFilterChange = (cat: string) => {
-    setActiveCategory(cat);
+  const animateGrid = useCallback(() => {
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         gsap.fromTo(
           ".galerie-photo",
-          { opacity: 0, scale: 0.92 },
-          { opacity: 1, scale: 1, stagger: 0.04, duration: 0.45, ease: "power3.out" }
+          { opacity: 0, scale: 0.92, y: 20 },
+          { opacity: 1, scale: 1, y: 0, stagger: 0.05, duration: 0.5, ease: "power3.out" }
         );
       });
     });
+  }, []);
+
+  const handleFilterChange = (cat: string) => {
+    setActiveCategory(cat);
+    setPage(0);
+    animateGrid();
+  };
+
+  const goToPage = (p: number) => {
+    setPage(p);
+    // Scroll to top of gallery section
+    sectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    animateGrid();
   };
 
   return (
@@ -175,33 +195,90 @@ export default function Galerie() {
         </div>
 
         {/* Masonry grid */}
-        <div className="columns-2 md:columns-3 lg:columns-4 gap-3 space-y-3">
-          {filtered.map((photo, i) => (
-            <div
-              key={`${photo.src}-${i}`}
-              className={`galerie-photo relative overflow-hidden cursor-pointer group break-inside-avoid ${
-                photo.span === "wide" ? "aspect-video" : photo.span === "tall" ? "aspect-[2/3]" : "aspect-square"
-              }`}
-              onClick={() => setLightboxIdx(i)}
-            >
-              <Image
-                src={photo.src}
-                alt={photo.alt}
-                fill
-                className="object-cover group-hover:scale-110 transition-transform duration-700"
-                sizes="(max-width: 768px) 50vw, 33vw"
-              />
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-end p-4">
-                <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span className="font-cinzel text-or text-xs tracking-[0.2em] uppercase">
-                    {photo.category}
-                  </span>
-                  <p className="font-poppins text-white text-sm mt-1">{photo.alt}</p>
+        <div ref={gridRef} className="columns-2 md:columns-3 lg:columns-4 gap-3 space-y-3">
+          {paged.map((photo, i) => {
+            const globalIdx = page * ITEMS_PER_PAGE + i;
+            return (
+              <div
+                key={`${photo.src}-${globalIdx}`}
+                className={`galerie-photo relative overflow-hidden cursor-pointer group break-inside-avoid ${
+                  photo.span === "wide" ? "aspect-video" : photo.span === "tall" ? "aspect-[2/3]" : "aspect-square"
+                }`}
+                onClick={() => setLightboxIdx(globalIdx)}
+              >
+                <Image
+                  src={photo.src}
+                  alt={photo.alt}
+                  fill
+                  className="object-cover group-hover:scale-110 transition-transform duration-700"
+                  sizes="(max-width: 768px) 50vw, 33vw"
+                />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-end p-4">
+                  <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <span className="font-cinzel text-or text-xs tracking-[0.2em] uppercase">
+                      {photo.category}
+                    </span>
+                    <p className="font-poppins text-white text-sm mt-1">{photo.alt}</p>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
+
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <div className="flex items-center justify-center gap-2 mt-14">
+            {/* Prev arrow */}
+            <button
+              onClick={() => page > 0 && goToPage(page - 1)}
+              disabled={page === 0}
+              className={`w-10 h-10 flex items-center justify-center rounded-full border transition-all duration-300 ${
+                page === 0
+                  ? "border-gray-200 text-gray-300 cursor-not-allowed"
+                  : "border-or/40 text-or hover:bg-or hover:text-vert cursor-pointer"
+              }`}
+              aria-label="Page précédente"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+
+            {/* Page indicators */}
+            <div className="flex items-center gap-1.5 mx-2">
+              {Array.from({ length: totalPages }, (_, i) => (
+                <button
+                  key={i}
+                  onClick={() => goToPage(i)}
+                  className={`transition-all duration-300 rounded-full cursor-pointer ${
+                    i === page
+                      ? "w-8 h-2 bg-or"
+                      : "w-2 h-2 bg-vert/20 hover:bg-or/50"
+                  }`}
+                  aria-label={`Page ${i + 1}`}
+                />
+              ))}
+            </div>
+
+            {/* Next arrow */}
+            <button
+              onClick={() => page < totalPages - 1 && goToPage(page + 1)}
+              disabled={page === totalPages - 1}
+              className={`w-10 h-10 flex items-center justify-center rounded-full border transition-all duration-300 ${
+                page === totalPages - 1
+                  ? "border-gray-200 text-gray-300 cursor-not-allowed"
+                  : "border-or/40 text-or hover:bg-or hover:text-vert cursor-pointer"
+              }`}
+              aria-label="Page suivante"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
+
+            {/* Page count */}
+            <span className="font-cinzel text-vert/40 text-xs tracking-[0.2em] ml-4">
+              {(page + 1).toString().padStart(2, "0")} / {totalPages.toString().padStart(2, "0")}
+            </span>
+          </div>
+        )}
       </div>
 
       {/* Lightbox */}

@@ -218,7 +218,7 @@ export default function CtaBanner() {
           {/* Secondary: form */}
           <button
             onClick={() =>
-              document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })
+              document.querySelector("#contact-form")?.scrollIntoView({ behavior: "smooth" })
             }
             className="font-cinzel text-white/60 border border-white/20 text-xs tracking-[0.2em] uppercase px-10 py-4 hover:border-or hover:text-or transition-all duration-300"
           >

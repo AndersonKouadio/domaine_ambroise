@@ -121,14 +121,14 @@ export default function Footer() {
               <div className="gold-line my-4" />
               <a
                 href="tel:+2250715552695"
-                className="inline-flex items-center gap-2 hover:text-or transition-colors justify-center md:justify-end"
+                className="flex items-center gap-2 hover:text-or transition-colors justify-center md:justify-end"
               >
                 <Phone className="w-3.5 h-3.5 text-or/70" />
                 +225 07 15 55 26 95
               </a>
               <a
                 href="tel:+33603263285"
-                className="inline-flex items-center gap-2 hover:text-or transition-colors justify-center md:justify-end"
+                className="flex items-center gap-2 hover:text-or transition-colors justify-center md:justify-end"
               >
                 <Phone className="w-3.5 h-3.5 text-or/70" />
                 +33 6 03 26 32 85

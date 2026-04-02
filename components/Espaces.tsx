@@ -191,7 +191,7 @@ export default function Espaces() {
             dans un cadre naturel exceptionnel.
           </p>
           <Button
-            onPress={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
+            onPress={() => document.querySelector("#contact-form")?.scrollIntoView({ behavior: "smooth" })}
             className="font-cinzel bg-or! text-vert! text-sm md:text-lg font-bold tracking-[0.2em] uppercase px-10 py-4 rounded-none hover:bg-or-light! h-auto min-h-0 transition-all duration-300 relative"
           >
             Demander un devis

@@ -43,7 +43,8 @@ export default function MenuPage() {
           />
         </div>
         <h1 className="font-cinzel text-vert text-2xl md:text-3xl font-semibold tracking-wider text-center">
-          Tarifs Boissons & Espaces 
+          Tarifs<br />
+          <span className="text-xl md:text-2xl">Boissons & Espaces</span>
         </h1>
         <div className="w-16 h-0.5 bg-or mt-4" />
         <p className="font-poppins text-black/40 text-xs tracking-widest mt-3">

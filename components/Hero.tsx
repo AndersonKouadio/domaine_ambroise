@@ -171,7 +171,7 @@ export default function Hero() {
           </Button>
           <Button
             variant="ghost"
-            onPress={() => scrollTo("#contact")}
+            onPress={() => scrollTo("#contact-form")}
             className="font-cinzel bg-transparent! text-white! border-2 border-white/70 text-xs font-semibold tracking-[0.2em] uppercase px-10 py-4 h-auto min-h-0 rounded-none hover:border-or hover:text-or! transition-all duration-300 w-full sm:w-auto"
           >
             Réserver

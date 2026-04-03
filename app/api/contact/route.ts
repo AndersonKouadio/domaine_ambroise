@@ -36,7 +36,7 @@ export async function POST(req: Request) {
     `;
 
     await resend.emails.send({
-      from: "Domaine Ambroise <onboarding@resend.dev>",
+      from: "Domaine Ambroise <noreply@domaineambroise.com>",
       to: "contact@domaineambroise.com",
       subject: `Nouvelle réservation – ${nom} – ${espace}`,
       html: htmlContent,

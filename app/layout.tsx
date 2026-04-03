@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
-import { Cinzel, Poppins } from "next/font/google";
+import { Cinzel, Poppins, Geist } from "next/font/google";
 import "./globals.css";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const cinzel = Cinzel({
   subsets: ["latin"],
@@ -44,7 +47,7 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
-      className={`${cinzel.variable} ${poppins.variable} scroll-smooth`}
+      className={cn("scroll-smooth", cinzel.variable, poppins.variable, "font-sans", geist.variable)}
       suppressHydrationWarning
     >
       <head />

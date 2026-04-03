@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { MapPin, Phone } from "lucide-react";
+import { MapPin, Phone, Mail } from "lucide-react";
 
 const socials = [
   {
@@ -132,6 +132,13 @@ export default function Footer() {
               >
                 <Phone className="w-3.5 h-3.5 text-or/70" />
                 +33 6 03 26 32 85
+              </a>
+              <a
+                href="mailto:contact@domaineambroise.com"
+                className="flex items-center gap-2 hover:text-or transition-colors justify-center md:justify-end"
+              >
+                <Mail className="w-3.5 h-3.5 text-or/70" />
+                contact@domaineambroise.com
               </a>
             </div>
           </div>
